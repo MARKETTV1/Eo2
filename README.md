@@ -1,6 +1,6 @@
 # E2-All-in-One - Enigma2 Manager
 
-[![Version](https://img.shields.io/badge/version-1.0-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0-blue.svg)]()
 
 أداة عربية متكاملة ومتعددة الاستخدامات لإدارة وتثبيت الإضافات على أجهزة **Enigma2** (مثل دريم بوكس، فيو بلس، وغيرها). تم تطويرها بواسطة **MARKETTV1**.
 
