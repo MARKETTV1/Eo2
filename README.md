@@ -1,6 +1,8 @@
 # E2-All-in-One - Enigma2 Manager
 
 [![Version](https://img.shields.io/badge/Version_beta-1.2-blue.svg)]()
+
+
 [![Version](https://img.shields.io/badge/karimSATPRO-MARKETTV1-brightgreen?style=for-the-badge)]()
 
 أداة عربية متكاملة ومتعددة الاستخدامات لإدارة وتثبيت الإضافات على أجهزة **Enigma2** (مثل دريم بوكس، فيو بلس، وغيرها). تم تطويرها بواسطة **MARKETTV1**.
