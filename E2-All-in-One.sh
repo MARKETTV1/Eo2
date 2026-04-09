@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - MARKETTV1
+#           ENIGMA2 MANAGER - Karim
 # ============================================================
 
 # ----- Colors -----
@@ -522,7 +522,7 @@ menu_main() {
         clear
         echo "${CYAN}============================${NC}"
         echo "${CYAN}      Enigma2 Manager       ${NC}"
-        echo "${CYAN}       by MARKETTV1         ${NC}"
+        echo "${CYAN}         by Karim           ${NC}"
         echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) PLUGINS & PANELS"
@@ -543,7 +543,16 @@ menu_main() {
             5) menu_tools ;;
             0)
                 clear
-                echo "${GREEN}Goodbye! 👋${NC}"
+                echo "${CYAN}========================================${NC}"
+                echo "${CYAN}      Enigma2 Manager - by Karim       ${NC}"
+                echo "${CYAN}========================================${NC}"
+                echo ""
+                echo "${GREEN}      Thank you for using Enigma2 Manager${NC}"
+                echo ""
+                echo "${YELLOW}      Your device has been successfully managed!${NC}"
+                echo "${YELLOW}              See you next time! 👋${NC}"
+                echo ""
+                echo "${CYAN}========================================${NC}"
                 echo ""
                 exit 0
                 ;;
