@@ -69,10 +69,31 @@ confirm_installation() {
 }
 
 # ============================================================
-# Function to parse multiple choices
+# Function to parse multiple choices (supports , and -)
 # ============================================================
 parse_choices() {
-    echo "$1" | tr ',' ' '
+    local input="$1"
+    local result=""
+    
+    # First replace commas with spaces
+    input=$(echo "$input" | tr ',' ' ')
+    
+    # Process each part
+    for part in $input; do
+        if echo "$part" | grep -q '-'; then
+            # Handle range like 1-4
+            start=$(echo "$part" | cut -d'-' -f1)
+            end=$(echo "$part" | cut -d'-' -f2)
+            for i in $(seq $start $end); do
+                result="$result $i"
+            done
+        else
+            # Handle single number
+            result="$result $part"
+        fi
+    done
+    
+    echo "$result"
 }
 
 # ============================================================
@@ -90,7 +111,7 @@ menu_plugins_panels() {
         echo "  3) EmilNabilPro"
         echo "  4) SimplySports"
         echo ""
-        echo "  Example: 1 or 1,2 or 1,2,3,4"
+        echo "  Example: 1 or 1,2 or 1-4 or 1,2-4"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -152,7 +173,7 @@ menu_all_images() {
         echo ""
         echo "  1) Fury"
         echo ""
-        echo "  Example: 1 or 1,2"
+        echo "  Example: 1 or 1,2 or 1-4"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -195,7 +216,7 @@ menu_openatv_skins() {
         echo ""
         echo "  1) MATRIX SKIN"
         echo ""
-        echo "  Example: 1 or 1,2"
+        echo "  Example: 1 or 1,2 or 1-4"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -318,7 +339,7 @@ menu_medias() {
         echo "  4) jedi maker xtream"
         echo "  5) BouquetMakerXtream"
         echo ""
-        echo "  Example: 1 or 1,3 or 1,2,3"
+        echo "  Example: 1 or 1,3 or 1-5 or 1,3-5"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -372,7 +393,7 @@ menu_softcam() {
         echo "  3) CCcam"
         echo "  4) OSCamicam_Kitte888"
         echo ""
-        echo "  Example: 1 or 1,2 or 1,2,3"
+        echo "  Example: 1 or 1,2 or 1-4 or 1,2-4"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -424,7 +445,7 @@ menu_tools() {
         echo "  3) Install wget & curl"
         echo "  4) Add OpenATV Feed emu oscam"
         echo ""
-        echo "  Example: 1 or 1,2 or 1,2,3,4"
+        echo "  Example: 1 or 1,2 or 1-4 or 1,2-4"
         echo ""
         echo "  0) BACK"
         echo ""
