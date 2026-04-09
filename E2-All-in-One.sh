@@ -135,8 +135,8 @@ menu_plugins_panels() {
                     ;;
             esac
         done
-        printf "\n${GREEN}Operation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Installation complete!!!${NC}"
+        sleep 2
     done
 }
 
@@ -178,8 +178,8 @@ menu_all_images() {
                 1) install_package "Fury" "https://raw.githubusercontent.com/islam-2412/IPKS/refs/heads/main/fury/installer.sh" ;;
             esac
         done
-        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Installation complete!!!${NC}"
+        sleep 2
     done
 }
 
@@ -221,8 +221,8 @@ menu_openatv_skins() {
                 1) install_package "MATRIX SKIN" "https://raw.githubusercontent.com/islam-2412/SKINS/main/Matrix/installer.sh" ;;
             esac
         done
-        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Installation complete!!!${NC}"
+        sleep 2
     done
 }
 
@@ -352,8 +352,8 @@ menu_medias() {
                 5) install_package "BouquetMakerXtream" "https://raw.githubusercontent.com/biko-73/BouquetMakerXtream/main/installer.sh" ;;
             esac
         done
-        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Installation complete!!!${NC}"
+        sleep 2
     done
 }
 
@@ -404,8 +404,8 @@ menu_softcam() {
                 4) install_package "OSCamicam_Kitte888"  "https://raw.githubusercontent.com/biko-73/OSCamicam_Kitte888/main/installer.sh" ;;
             esac
         done
-        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Installation complete!!!${NC}"
+        sleep 2
     done
 }
 
@@ -488,8 +488,8 @@ menu_tools() {
                     ;;
             esac
         done
-        printf "\n${GREEN}Operation complete! Press Enter...${NC}"
-        read dummy < /dev/tty
+        echo "\n${GREEN}Operation complete!!!${NC}"
+        sleep 2
     done
 }
 
