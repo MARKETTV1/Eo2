@@ -1,16 +1,24 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - MARKETTV1 (NO COLORS)
+#           ENIGMA2 MANAGER - MARKETTV1
 # ============================================================
 
-# ----- No Colors -----
-RED=''
-GREEN=''
-YELLOW=''
-BLUE=''
-CYAN=''
-NC=''
+# ----- Colors -----
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# ============================================================
+# Function to read input (FIXED)
+# ============================================================
+get_input() {
+    read choice < /dev/tty
+    echo "$choice"
+}
 
 # ============================================================
 # Function to install package via wget
@@ -19,11 +27,11 @@ install_package() {
     local name="$1"
     local url="$2"
     echo ""
-    echo ">>> Installing ${name}..."
+    echo "${GREEN}>>> Installing ${name}...${NC}"
     opkg update > /dev/null 2>&1
     opkg install wget > /dev/null 2>&1
     wget --no-check-certificate "${url}" -O - | /bin/sh
-    echo ">>> ${name} installed successfully!"
+    echo "${GREEN}>>> ${name} installed successfully!${NC}"
 }
 
 # ============================================================
@@ -33,10 +41,10 @@ install_opkg() {
     local name="$1"
     local pkg="$2"
     echo ""
-    echo ">>> Installing ${name}..."
+    echo "${GREEN}>>> Installing ${name}...${NC}"
     opkg update > /dev/null 2>&1
     opkg install "$pkg"
-    echo ">>> ${name} installed successfully!"
+    echo "${GREEN}>>> ${name} installed successfully!${NC}"
 }
 
 # ============================================================
@@ -45,22 +53,23 @@ install_opkg() {
 confirm_installation() {
     local items="$1"
     local count="$2"
+    local confirm=""
     echo ""
-    echo "========================================"
-    echo "         Installation Summary"
-    echo "========================================"
+    echo "${YELLOW}========================================${NC}"
+    echo "${YELLOW}         Installation Summary           ${NC}"
+    echo "${YELLOW}========================================${NC}"
     echo ""
-    echo "Items to be installed:"
+    echo "${CYAN}Items to be installed:${NC}"
     echo -e "$items"
     echo ""
-    echo "Total: $count item(s)"
+    echo "${YELLOW}Total: $count item(s)${NC}"
     echo ""
-    printf "Proceed with installation? (y/n): "
-    read confirm
+    printf "${YELLOW}Proceed with installation? (y/n): ${NC}"
+    read confirm < /dev/tty
     case $confirm in
         y|Y|yes|YES) return 0 ;;
         *)
-            echo ">>> Cancelled."
+            echo "${RED}>>> Cancelled.${NC}"
             sleep 1
             return 1
             ;;
@@ -80,9 +89,9 @@ parse_choices() {
 menu_plugins_panels() {
     while true; do
         clear
-        echo "============================"
-        echo "     PLUGINS & PANELS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}     PLUGINS & PANELS       ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) AjPanel"
         echo "  2) Linuxsat Panel"
@@ -93,8 +102,8 @@ menu_plugins_panels() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
 
@@ -105,11 +114,11 @@ menu_plugins_panels() {
                 2) items="${items}  - Linuxsat Panel\n" ; count=$((count+1)) ;;
                 3) items="${items}  - EmilNabilPro\n" ; count=$((count+1)) ;;
                 4) items="${items}  - SimplySports\n" ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -120,7 +129,7 @@ menu_plugins_panels() {
                 3) install_package "EmilNabilPro" "https://raw.githubusercontent.com/emilnabil/download-plugins/refs/heads/main/EmilPanelPro/emilpanelpro.sh" ;;
                 4)
                     echo ""
-                    echo ">>> Installing SimplySports..."
+                    echo "${GREEN}>>> Installing SimplySports...${NC}"
                     opkg update > /dev/null 2>&1
                     opkg install wget unzip > /dev/null 2>&1
                     cd /usr/lib/enigma2/python/Plugins/Extensions && rm -rf SimplySports
@@ -128,14 +137,14 @@ menu_plugins_panels() {
                     unzip SimplySports.zip
                     mv SimplySports-main SimplySports
                     rm SimplySports.zip
-                    echo ">>> SimplySports installed successfully!"
+                    echo "${GREEN}>>> SimplySports installed successfully!${NC}"
                     echo ""
-                    echo ">>> Please restart Enigma2 manually from TOOLS menu to apply changes."
+                    echo "${YELLOW}>>> Please restart Enigma2 manually from TOOLS menu to apply changes.${NC}"
                     ;;
             esac
         done
-        printf "\nOperation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Operation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -145,9 +154,9 @@ menu_plugins_panels() {
 menu_all_images() {
     while true; do
         clear
-        echo "============================"
-        echo "         ALL IMAGES"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}         ALL IMAGES         ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) Fury"
         echo ""
@@ -155,8 +164,8 @@ menu_all_images() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_skins; return; }
 
@@ -164,11 +173,11 @@ menu_all_images() {
         for ch in $(parse_choices "$choice"); do
             case $ch in
                 1) items="${items}  - Fury\n" ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -177,8 +186,8 @@ menu_all_images() {
                 1) install_package "Fury" "https://raw.githubusercontent.com/islam-2412/IPKS/refs/heads/main/fury/installer.sh" ;;
             esac
         done
-        printf "\nInstallation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -188,9 +197,9 @@ menu_all_images() {
 menu_openatv_skins() {
     while true; do
         clear
-        echo "============================"
-        echo "       OPENATV SKINS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}       OPENATV SKINS        ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) MATRIX SKIN"
         echo ""
@@ -198,8 +207,8 @@ menu_openatv_skins() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_skins; return; }
 
@@ -207,11 +216,11 @@ menu_openatv_skins() {
         for ch in $(parse_choices "$choice"); do
             case $ch in
                 1) items="${items}  - MATRIX SKIN\n" ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -220,8 +229,8 @@ menu_openatv_skins() {
                 1) install_package "MATRIX SKIN" "https://raw.githubusercontent.com/islam-2412/SKINS/main/Matrix/installer.sh" ;;
             esac
         done
-        printf "\nInstallation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -231,19 +240,19 @@ menu_openatv_skins() {
 menu_egami_skins() {
     while true; do
         clear
-        echo "============================"
-        echo "        EGAMI SKINS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}        EGAMI SKINS         ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) Coming soon..."
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        read choice < /dev/tty
         case $choice in
             0) menu_skins; return ;;
-            *) echo ">>> Coming soon..." ; sleep 1 ;;
+            *) echo "${RED}>>> Coming soon...${NC}" ; sleep 1 ;;
         esac
     done
 }
@@ -254,19 +263,19 @@ menu_egami_skins() {
 menu_openbh_skins() {
     while true; do
         clear
-        echo "============================"
-        echo "        OPENBH SKINS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}        OPENBH SKINS        ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) Coming soon..."
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        read choice < /dev/tty
         case $choice in
             0) menu_skins; return ;;
-            *) echo ">>> Coming soon..." ; sleep 1 ;;
+            *) echo "${RED}>>> Coming soon...${NC}" ; sleep 1 ;;
         esac
     done
 }
@@ -277,9 +286,9 @@ menu_openbh_skins() {
 menu_skins() {
     while true; do
         clear
-        echo "============================"
-        echo "           SKINS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}           SKINS            ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) OPENATV SKINS"
         echo "  2) ALL IMAGES"
@@ -288,15 +297,15 @@ menu_skins() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        read choice < /dev/tty
         case $choice in
             1) menu_openatv_skins ;;
             2) menu_all_images ;;
             3) menu_egami_skins ;;
             4) menu_openbh_skins ;;
             0) menu_main; return ;;
-            *) echo "Invalid option!" ; sleep 1 ;;
+            *) echo "${RED}Invalid option!${NC}" ; sleep 1 ;;
         esac
     done
 }
@@ -307,9 +316,9 @@ menu_skins() {
 menu_medias() {
     while true; do
         clear
-        echo "============================"
-        echo "          MEDIAS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}          MEDIAS            ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) estalky"
         echo "  2) xclass"
@@ -321,8 +330,8 @@ menu_medias() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
 
@@ -334,11 +343,11 @@ menu_medias() {
                 3) items="${items}  - xtreamity\n"          ; count=$((count+1)) ;;
                 4) items="${items}  - jedi maker xtream\n"  ; count=$((count+1)) ;;
                 5) items="${items}  - BouquetMakerXtream\n" ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -351,8 +360,8 @@ menu_medias() {
                 5) install_package "BouquetMakerXtream" "https://raw.githubusercontent.com/biko-73/BouquetMakerXtream/main/installer.sh" ;;
             esac
         done
-        printf "\nInstallation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -362,9 +371,9 @@ menu_medias() {
 menu_softcam() {
     while true; do
         clear
-        echo "============================"
-        echo "         SOFTCAM"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}         SOFTCAM            ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) OSCam (MARKETTV1)"
         echo "  2) NCam"
@@ -375,8 +384,8 @@ menu_softcam() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
 
@@ -387,11 +396,11 @@ menu_softcam() {
                 2) items="${items}  - NCam\n"                   ; count=$((count+1)) ;;
                 3) items="${items}  - CCcam\n"                  ; count=$((count+1)) ;;
                 4) items="${items}  - OSCamicam_Kitte888\n"     ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -403,8 +412,8 @@ menu_softcam() {
                 4) install_package "OSCamicam_Kitte888"  "https://raw.githubusercontent.com/biko-73/OSCamicam_Kitte888/main/installer.sh" ;;
             esac
         done
-        printf "\nInstallation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Installation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -414,9 +423,9 @@ menu_softcam() {
 menu_tools() {
     while true; do
         clear
-        echo "============================"
-        echo "           TOOLS"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}           TOOLS            ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) System Update (opkg update/upgrade)"
         echo "  2) Restart Enigma2"
@@ -427,8 +436,8 @@ menu_tools() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
 
@@ -439,11 +448,11 @@ menu_tools() {
                 2) items="${items}  - Restart Enigma2\n"                      ; count=$((count+1)) ;;
                 3) items="${items}  - Install wget & curl\n"                  ; count=$((count+1)) ;;
                 4) items="${items}  - Add OpenATV Feed emu oscam\n"           ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
+                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count" || continue
 
@@ -451,44 +460,44 @@ menu_tools() {
             case $ch in
                 1)
                     echo ""
-                    echo ">>> Stopping Enigma2 (init 4)..."
+                    echo "${GREEN}>>> Stopping Enigma2 (init 4)...${NC}"
                     init 4
                     sleep 2
-                    echo ">>> Updating package lists (opkg update)..."
+                    echo "${GREEN}>>> Updating package lists (opkg update)...${NC}"
                     opkg update
-                    echo ">>> Upgrading packages (opkg upgrade)..."
+                    echo "${GREEN}>>> Upgrading packages (opkg upgrade)...${NC}"
                     opkg upgrade
-                    echo ">>> Restarting Enigma2 (init 3)..."
+                    echo "${GREEN}>>> Restarting Enigma2 (init 3)...${NC}"
                     init 3
-                    echo ">>> System update completed!"
+                    echo "${GREEN}>>> System update completed!${NC}"
                     ;;
                 2)
                     echo ""
-                    echo ">>> Restarting Enigma2..."
+                    echo "${GREEN}>>> Restarting Enigma2...${NC}"
                     init 4 && sleep 2 && init 3
-                    echo ">>> Enigma2 restarted!"
+                    echo "${GREEN}>>> Enigma2 restarted!${NC}"
                     ;;
                 3)
                     echo ""
-                    echo ">>> Installing wget..."
+                    echo "${GREEN}>>> Installing wget...${NC}"
                     opkg update
                     opkg install wget
-                    echo ">>> wget installed successfully!"
+                    echo "${GREEN}>>> wget installed successfully!${NC}"
                     echo ""
-                    echo ">>> Installing curl..."
+                    echo "${GREEN}>>> Installing curl...${NC}"
                     opkg install curl
-                    echo ">>> curl installed successfully!"
+                    echo "${GREEN}>>> curl installed successfully!${NC}"
                     ;;
                 4)
                     echo ""
-                    echo ">>> Adding OpenATV Feed emu oscam..."
+                    echo "${GREEN}>>> Adding OpenATV Feed emu oscam...${NC}"
                     wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
-                    echo ">>> OpenATV Feed emu oscam added successfully!"
+                    echo "${GREEN}>>> OpenATV Feed emu oscam added successfully!${NC}"
                     ;;
             esac
         done
-        printf "\nOperation complete! Press Enter..."
-        read dummy
+        printf "\n${GREEN}Operation complete! Press Enter...${NC}"
+        read dummy < /dev/tty
     done
 }
 
@@ -498,10 +507,10 @@ menu_tools() {
 menu_main() {
     while true; do
         clear
-        echo "============================"
-        echo "      Enigma2 Manager"
-        echo "       by MARKETTV1"
-        echo "============================"
+        echo "${CYAN}============================${NC}"
+        echo "${CYAN}      Enigma2 Manager       ${NC}"
+        echo "${CYAN}       by MARKETTV1         ${NC}"
+        echo "${CYAN}============================${NC}"
         echo ""
         echo "  1) PLUGINS & PANELS"
         echo "  2) SKINS"
@@ -511,8 +520,8 @@ menu_main() {
         echo ""
         echo "  0) EXIT"
         echo ""
-        printf "Choose: "
-        read choice
+        printf "${YELLOW}Choose: ${NC}"
+        choice=$(get_input)
         case $choice in
             1) menu_plugins_panels ;;
             2) menu_skins ;;
@@ -521,11 +530,11 @@ menu_main() {
             5) menu_tools ;;
             0)
                 clear
-                echo "Goodbye! 👋"
+                echo "${GREEN}Goodbye! 👋${NC}"
                 echo ""
                 exit 0
                 ;;
-            *) echo "Invalid option!" ; sleep 1 ;;
+            *) echo "${RED}Invalid option!${NC}" ; sleep 1 ;;
         esac
     done
 }
