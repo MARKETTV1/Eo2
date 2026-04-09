@@ -48,12 +48,11 @@ install_opkg() {
 }
 
 # ============================================================
-# Function to confirm installation
+# Function to confirm installation (NO PROMPT - direct install)
 # ============================================================
 confirm_installation() {
     local items="$1"
     local count="$2"
-    local confirm=""
     echo ""
     echo "${YELLOW}========================================${NC}"
     echo "${YELLOW}         Installation Summary           ${NC}"
@@ -64,16 +63,9 @@ confirm_installation() {
     echo ""
     echo "${YELLOW}Total: $count item(s)${NC}"
     echo ""
-    printf "${YELLOW}Proceed with installation? (y/n): ${NC}"
-    read confirm < /dev/tty
-    case $confirm in
-        y|Y|yes|YES) return 0 ;;
-        *)
-            echo "${RED}>>> Cancelled.${NC}"
-            sleep 1
-            return 1
-            ;;
-    esac
+    echo "${GREEN}>>> Starting installation...${NC}"
+    sleep 1
+    return 0
 }
 
 # ============================================================
@@ -120,7 +112,7 @@ menu_plugins_panels() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
@@ -179,7 +171,7 @@ menu_all_images() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
@@ -222,7 +214,7 @@ menu_openatv_skins() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
@@ -320,7 +312,7 @@ menu_medias() {
         echo "${CYAN}          MEDIAS            ${NC}"
         echo "${CYAN}============================${NC}"
         echo ""
-        echo "  1) estalky"
+        echo "  1) estalker"
         echo "  2) xclass"
         echo "  3) xtreamity"
         echo "  4) jedi maker xtream"
@@ -338,7 +330,7 @@ menu_medias() {
         items="" ; count=0
         for ch in $(parse_choices "$choice"); do
             case $ch in
-                1) items="${items}  - estalky\n"            ; count=$((count+1)) ;;
+                1) items="${items}  - estalker\n"            ; count=$((count+1)) ;;
                 2) items="${items}  - xclass\n"             ; count=$((count+1)) ;;
                 3) items="${items}  - xtreamity\n"          ; count=$((count+1)) ;;
                 4) items="${items}  - jedi maker xtream\n"  ; count=$((count+1)) ;;
@@ -349,11 +341,11 @@ menu_medias() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
-                1) install_package "estalky"            "https://raw.githubusercontent.com/biko-73/estalky/main/installer.sh" ;;
+                1) install_package "estalker"            "https://raw.githubusercontent.com/biko-73/estalky/main/installer.sh" ;;
                 2) install_package "xclass"             "https://raw.githubusercontent.com/biko-73/xklass/main/installer.sh" ;;
                 3) install_package "xtreamity"          "https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh" ;;
                 4) install_package "jedi maker xtream"  "https://raw.githubusercontent.com/jediepg/jedimakerxtream/main/installer.sh" ;;
@@ -402,7 +394,7 @@ menu_softcam() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
@@ -454,7 +446,7 @@ menu_tools() {
 
         [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
 
-        confirm_installation "$items" "$count" || continue
+        confirm_installation "$items" "$count"
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
