@@ -137,8 +137,9 @@ menu_plugins_panels() {
         echo "  8) E2BissKeyEditor"
         echo "  9) Satelliweb"
         echo " 10) FootOnsat"
+        echo " 11) NewVirtualkeyboard"
         echo ""
-        echo "  Example: 1 or 1,2 or 1-10 or 1 3 5"
+        echo "  Example: 1 or 1,2 or 1-11 or 1 3 5"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -160,6 +161,7 @@ menu_plugins_panels() {
                 8) items="${items}  - E2BissKeyEditor\n" ; count=$((count+1)) ;;
                 9) items="${items}  - Satelliweb\n" ; count=$((count+1)) ;;
                10) items="${items}  - FootOnsat\n" ; count=$((count+1)) ;;
+               11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
                 *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
             esac
         done
@@ -193,6 +195,7 @@ menu_plugins_panels() {
                 8) install_package "E2BissKeyEditor" "https://raw.githubusercontent.com/ismail9875/E2BissKeyEditor/refs/heads/main/installer.sh" ;;
                 9) install_package "Satelliweb" "http://dreambox4u.com/dreamarabia/Satelliweb_e2/install_satelliweb.sh" ;;
                10) install_package "FootOnsat" "https://raw.githubusercontent.com/fairbird/FootOnsat/main/Download/install.sh" ;;
+               11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
             esac
         done
         echo "\n${GREEN}Installation complete!!!${NC}"
