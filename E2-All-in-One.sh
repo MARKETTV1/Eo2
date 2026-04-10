@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - Karim (No Colors)
+#           ENIGMA2 MANAGER - Karim
 # ============================================================
 
 # ============================================================
@@ -666,6 +666,7 @@ menu_tools() {
                     echo "  - All device settings                          "
                     echo "                                                 "
                     echo "  This action CANNOT be undone!                  "
+                    echo "  The device will REBOOT completely!             "
                     echo "================================================"
                     echo ""
                     printf "To confirm Factory Reset, type: YES: "
@@ -675,9 +676,9 @@ menu_tools() {
                         echo ">>> Starting Factory Reset..."
                         echo ">>> Stopping Enigma2 (init 4)..."
                         init 4
-                        sleep 2
-                        echo ">>> Deleting all settings (rm -rf /etc/enigma2/*)..."
-                        rm -rf /etc/enigma2/*
+                        sleep 5
+                        echo ">>> Deleting all settings (rm -f /etc/enigma2/*)..."
+                        rm -f /etc/enigma2/*
                         echo ">>> Rebooting device..."
                         sleep 2
                         echo ">>> Rebooting now..."
