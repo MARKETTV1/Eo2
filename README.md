@@ -21,3 +21,6 @@
 
 ```bash
 wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/Eo2/refs/heads/main/E2-All-in-One.sh -O - | /bin/sh
+
+```bash
+wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/enigma2-fix-players/refs/heads/main/fix_players.sh -O - | /bin/sh
