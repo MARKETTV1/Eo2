@@ -1,16 +1,8 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - Karim
+#           ENIGMA2 MANAGER - Karim (No Colors)
 # ============================================================
-
-# ----- Colors -----
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-NC='\033[0m'
 
 # ============================================================
 # Function to read input (FIXED)
@@ -27,11 +19,11 @@ install_package() {
     local name="$1"
     local url="$2"
     echo ""
-    echo "${GREEN}>>> Installing ${name}...${NC}"
+    echo ">>> Installing ${name}..."
     opkg update > /dev/null 2>&1
     opkg install wget > /dev/null 2>&1
     wget --no-check-certificate "${url}" -O - | /bin/sh
-    echo "${GREEN}>>> ${name} installed successfully!${NC}"
+    echo ">>> ${name} installed successfully!"
 }
 
 # ============================================================
@@ -41,10 +33,10 @@ install_opkg() {
     local name="$1"
     local pkg="$2"
     echo ""
-    echo "${GREEN}>>> Installing ${name}...${NC}"
+    echo ">>> Installing ${name}..."
     opkg update > /dev/null 2>&1
     opkg install "$pkg"
-    echo "${GREEN}>>> ${name} installed successfully!${NC}"
+    echo ">>> ${name} installed successfully!"
 }
 
 # ============================================================
@@ -54,7 +46,7 @@ install_ipk() {
     local name="$1"
     local url="$2"
     echo ""
-    echo "${GREEN}>>> Installing ${name}...${NC}"
+    echo ">>> Installing ${name}..."
     opkg update > /dev/null 2>&1
     opkg install wget > /dev/null 2>&1
     IPK_FILE="/tmp/${name}.ipk"
@@ -62,9 +54,9 @@ install_ipk() {
     if [ -f "$IPK_FILE" ]; then
         opkg install "$IPK_FILE"
         rm -f "$IPK_FILE"
-        echo "${GREEN}>>> ${name} installed successfully!${NC}"
+        echo ">>> ${name} installed successfully!"
     else
-        echo "${RED}>>> Failed to download ${name} package!${NC}"
+        echo ">>> Failed to download ${name} package!"
     fi
 }
 
@@ -75,16 +67,16 @@ confirm_installation() {
     local items="$1"
     local count="$2"
     echo ""
-    echo "${YELLOW}========================================${NC}"
-    echo "${YELLOW}         Installation Summary           ${NC}"
-    echo "${YELLOW}========================================${NC}"
+    echo "========================================"
+    echo "         Installation Summary           "
+    echo "========================================"
     echo ""
-    echo "${CYAN}Items to be installed:${NC}"
+    echo "Items to be installed:"
     echo -e "$items"
     echo ""
-    echo "${YELLOW}Total: $count item(s)${NC}"
+    echo "Total: $count item(s)"
     echo ""
-    echo "${GREEN}>>> Starting installation...${NC}"
+    echo ">>> Starting installation..."
     sleep 1
     return 0
 }
@@ -123,9 +115,9 @@ parse_choices() {
 menu_plugins_panels() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}     PLUGINS & PANELS       ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "     PLUGINS & PANELS       "
+        echo "============================"
         echo ""
         echo "  1) AjPanel"
         echo "  2) Linuxsat Panel"
@@ -143,7 +135,7 @@ menu_plugins_panels() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
@@ -162,11 +154,11 @@ menu_plugins_panels() {
                 9) items="${items}  - Satelliweb\n" ; count=$((count+1)) ;;
                10) items="${items}  - FootOnsat\n" ; count=$((count+1)) ;;
                11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -177,7 +169,7 @@ menu_plugins_panels() {
                 3) install_package "EmilNabilPro" "https://raw.githubusercontent.com/emilnabil/download-plugins/refs/heads/main/EmilPanelPro/emilpanelpro.sh" ;;
                 4)
                     echo ""
-                    echo "${GREEN}>>> Installing SimplySports...${NC}"
+                    echo ">>> Installing SimplySports..."
                     opkg update > /dev/null 2>&1
                     opkg install wget unzip > /dev/null 2>&1
                     cd /usr/lib/enigma2/python/Plugins/Extensions && rm -rf SimplySports
@@ -185,9 +177,9 @@ menu_plugins_panels() {
                     unzip SimplySports.zip
                     mv SimplySports-main SimplySports
                     rm SimplySports.zip
-                    echo "${GREEN}>>> SimplySports installed successfully!${NC}"
+                    echo ">>> SimplySports installed successfully!"
                     echo ""
-                    echo "${YELLOW}>>> Please restart Enigma2 manually from TOOLS menu to apply changes.${NC}"
+                    echo ">>> Please restart Enigma2 manually from TOOLS menu to apply changes."
                     ;;
                 5) install_package "FuryBiss" "https://raw.githubusercontent.com/islam-2412/FuryBiss/main/fury/installer.sh" ;;
                 6) install_package "RaedQuickSignal" "https://raw.githubusercontent.com/fairbird/RaedQuickSignal/main/installer_Version8.8.sh" ;;
@@ -198,7 +190,8 @@ menu_plugins_panels() {
                11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -209,9 +202,9 @@ menu_plugins_panels() {
 menu_all_images() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}         ALL IMAGES         ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "         ALL IMAGES         "
+        echo "============================"
         echo ""
         echo "  1) Fury"
         echo ""
@@ -219,7 +212,7 @@ menu_all_images() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_skins; return; }
@@ -228,11 +221,11 @@ menu_all_images() {
         for ch in $(parse_choices "$choice"); do
             case $ch in
                 1) items="${items}  - Fury\n" ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -241,7 +234,8 @@ menu_all_images() {
                 1) install_package "Fury" "https://raw.githubusercontent.com/islam-2412/IPKS/refs/heads/main/fury/installer.sh" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -252,9 +246,9 @@ menu_all_images() {
 menu_openatv_skins() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}       OPENATV SKINS        ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "       OPENATV SKINS        "
+        echo "============================"
         echo ""
         echo "  1) MATRIX SKIN"
         echo ""
@@ -262,7 +256,7 @@ menu_openatv_skins() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_skins; return; }
@@ -271,11 +265,11 @@ menu_openatv_skins() {
         for ch in $(parse_choices "$choice"); do
             case $ch in
                 1) items="${items}  - MATRIX SKIN\n" ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -284,7 +278,8 @@ menu_openatv_skins() {
                 1) install_package "MATRIX SKIN" "https://raw.githubusercontent.com/islam-2412/SKINS/main/Matrix/installer.sh" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -295,19 +290,19 @@ menu_openatv_skins() {
 menu_egami_skins() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}        EGAMI SKINS         ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "        EGAMI SKINS         "
+        echo "============================"
         echo ""
         echo "  1) Coming soon..."
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         read choice < /dev/tty
         case $choice in
             0) menu_skins; return ;;
-            *) echo "${RED}>>> Coming soon...${NC}" ; sleep 1 ;;
+            *) echo ">>> Coming soon..." ; sleep 1 ;;
         esac
     done
 }
@@ -318,19 +313,19 @@ menu_egami_skins() {
 menu_openbh_skins() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}        OPENBH SKINS        ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "        OPENBH SKINS        "
+        echo "============================"
         echo ""
         echo "  1) Coming soon..."
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         read choice < /dev/tty
         case $choice in
             0) menu_skins; return ;;
-            *) echo "${RED}>>> Coming soon...${NC}" ; sleep 1 ;;
+            *) echo ">>> Coming soon..." ; sleep 1 ;;
         esac
     done
 }
@@ -341,9 +336,9 @@ menu_openbh_skins() {
 menu_skins() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}           SKINS            ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "           SKINS            "
+        echo "============================"
         echo ""
         echo "  1) OPENATV SKINS"
         echo "  2) ALL IMAGES"
@@ -353,7 +348,7 @@ menu_skins() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         read choice < /dev/tty
         case $choice in
             1) menu_openatv_skins ;;
@@ -362,7 +357,7 @@ menu_skins() {
             4) menu_openbh_skins ;;
             5) menu_other_skins ;;
             0) menu_main; return ;;
-            *) echo "${RED}Invalid option!${NC}" ; sleep 1 ;;
+            *) echo "Invalid option!" ; sleep 1 ;;
         esac
     done
 }
@@ -373,9 +368,9 @@ menu_skins() {
 menu_other_skins() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}        OTHER SKINS         ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "        OTHER SKINS         "
+        echo "============================"
         echo ""
         echo "  1) Maxy-FHD by MNASR"
         echo "  2) XDREAMY"
@@ -388,7 +383,7 @@ menu_other_skins() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_skins; return; }
@@ -402,11 +397,11 @@ menu_other_skins() {
                 4) items="${items}  - premium-fhd-black\n" ; count=$((count+1)) ;;
                 5) items="${items}  - premium-fhd-blue\n"  ; count=$((count+1)) ;;
                 6) items="${items}  - premium-fhd-magenta\n" ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -420,7 +415,8 @@ menu_other_skins() {
                 6) install_package "premium-fhd-magenta" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-_magenta.sh" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -431,9 +427,9 @@ menu_other_skins() {
 menu_medias() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}          MEDIAS            ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "          MEDIAS            "
+        echo "============================"
         echo ""
         echo "  1) estalker"
         echo "  2) xclass"
@@ -448,7 +444,7 @@ menu_medias() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
@@ -464,11 +460,11 @@ menu_medias() {
                 6) items="${items}  - E2iPlayer\n"          ; count=$((count+1)) ;;
                 7) items="${items}  - IPAudioPro\n"         ; count=$((count+1)) ;;
                 8) items="${items}  - AISubtitles\n"        ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -484,7 +480,8 @@ menu_medias() {
                 8) install_ipk "AISubtitles" "https://github.com/milanello13/aisubtitles/releases/download/v2.0/enigma2-plugin-extensions-aisubtitles_v2.0_all.ipk" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -495,9 +492,9 @@ menu_medias() {
 menu_softcam() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}         SOFTCAM            ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "         SOFTCAM            "
+        echo "============================"
         echo ""
         echo "  1) OSCam 11946 (compiled by levi5)"
         echo "  2) NCam (Latest version)"
@@ -508,7 +505,7 @@ menu_softcam() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
@@ -520,11 +517,11 @@ menu_softcam() {
                 2) items="${items}  - NCam (Latest version)\n"           ; count=$((count+1)) ;;
                 3) items="${items}  - Add OpenATV Feed (SoftCAM)\n"      ; count=$((count+1)) ;;
                 4) items="${items}  - OSCamicam_Kitte888\n"              ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -534,16 +531,17 @@ menu_softcam() {
                 2) install_package "NCam (Latest version)" "https://raw.githubusercontent.com/biko-73/Ncam_EMU/main/installer.sh" ;;
                 3)
                     echo ""
-                    echo "${GREEN}>>> Adding OpenATV Feed (SoftCAM)...${NC}"
+                    echo ">>> Adding OpenATV Feed (SoftCAM)..."
                     echo ""
                     wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
                     echo ""
-                    echo "${GREEN}>>> OpenATV Feed (SoftCAM) added successfully!${NC}"
+                    echo ">>> OpenATV Feed (SoftCAM) added successfully!"
                     ;;
                 4) install_package "OSCamicam_Kitte888"  "https://raw.githubusercontent.com/biko-73/OSCamicam_Kitte888/main/installer.sh" ;;
             esac
         done
-        echo "\n${GREEN}Installation complete!!!${NC}"
+        echo ""
+        echo "Installation complete!!!"
         sleep 2
     done
 }
@@ -554,9 +552,9 @@ menu_softcam() {
 menu_tools() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}           TOOLS            ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "           TOOLS            "
+        echo "============================"
         echo ""
         echo "  1) System Update (opkg update/upgrade)"
         echo "  2) Restart Enigma2"
@@ -564,13 +562,13 @@ menu_tools() {
         echo "  4) Add OpenATV Feed emu oscam"
         echo "  5) Check Python3 Version"
         echo "  6) Check IP & MAC Address"
-        echo "  7) Factory Reset (⚠️ DANGER ⚠️)"
+        echo "  7) Factory Reset (!!! DANGER !!!)"
         echo ""
         echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
@@ -584,12 +582,12 @@ menu_tools() {
                 4) items="${items}  - Add OpenATV Feed emu oscam\n"           ; count=$((count+1)) ;;
                 5) items="${items}  - Check Python3 Version\n"                ; count=$((count+1)) ;;
                 6) items="${items}  - Check IP & MAC Address\n"               ; count=$((count+1)) ;;
-                7) items="${items}  - Factory Reset (⚠️ DANGER ⚠️)\n"         ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                7) items="${items}  - Factory Reset (DANGER)\n"               ; count=$((count+1)) ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -597,110 +595,103 @@ menu_tools() {
             case $ch in
                 1)
                     echo ""
-                    echo "${GREEN}>>> Stopping Enigma2 (init 4)...${NC}"
+                    echo ">>> Stopping Enigma2 (init 4)..."
                     init 4
                     sleep 2
-                    echo "${GREEN}>>> Updating package lists (opkg update)...${NC}"
+                    echo ">>> Updating package lists (opkg update)..."
                     opkg update
-                    echo "${GREEN}>>> Upgrading packages (opkg upgrade)...${NC}"
+                    echo ">>> Upgrading packages (opkg upgrade)..."
                     opkg upgrade
-                    echo "${GREEN}>>> Restarting Enigma2 (init 3)...${NC}"
+                    echo ">>> Restarting Enigma2 (init 3)..."
                     init 3
-                    echo "${GREEN}>>> System update completed!${NC}"
+                    echo ">>> System update completed!"
                     ;;
                 2)
                     echo ""
-                    echo "${GREEN}>>> Restarting Enigma2...${NC}"
+                    echo ">>> Restarting Enigma2..."
                     init 4 && sleep 2 && init 3
-                    echo "${GREEN}>>> Enigma2 restarted!${NC}"
+                    echo ">>> Enigma2 restarted!"
                     ;;
                 3)
                     echo ""
-                    echo "${GREEN}>>> Installing wget...${NC}"
+                    echo ">>> Installing wget..."
                     opkg update
                     opkg install wget
-                    echo "${GREEN}>>> wget installed successfully!${NC}"
+                    echo ">>> wget installed successfully!"
                     echo ""
-                    echo "${GREEN}>>> Installing curl...${NC}"
+                    echo ">>> Installing curl..."
                     opkg install curl
-                    echo "${GREEN}>>> curl installed successfully!${NC}"
+                    echo ">>> curl installed successfully!"
                     ;;
                 4)
                     echo ""
-                    echo "${GREEN}>>> Adding OpenATV Feed emu oscam...${NC}"
+                    echo ">>> Adding OpenATV Feed emu oscam..."
                     wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
-                    echo "${GREEN}>>> OpenATV Feed emu oscam added successfully!${NC}"
+                    echo ">>> OpenATV Feed emu oscam added successfully!"
                     ;;
                 5)
                     echo ""
-                    echo "${GREEN}>>> Checking Python3 version...${NC}"
+                    echo ">>> Checking Python3 version..."
                     echo ""
                     python3 --version
                     echo ""
-                    echo "${GREEN}>>> Python3 version check completed!${NC}"
+                    echo ">>> Python3 version check completed!"
                     echo ""
-                    echo "${YELLOW}>>> Waiting 20 seconds before returning to menu...${NC}"
+                    echo ">>> Waiting 20 seconds before returning to menu..."
                     sleep 20
                     ;;
                 6)
                     echo ""
-                    echo "${GREEN}========================================${NC}"
-                    echo "${GREEN}         Network Information            ${NC}"
-                    echo "${GREEN}========================================${NC}"
+                    echo "========================================"
+                    echo "         Network Information            "
+                    echo "========================================"
                     echo ""
                     ip a | grep -E "inet |link/ether"
                     echo ""
-                    echo "${GREEN}========================================${NC}"
-                    echo "${GREEN}>>> IP & MAC Address check completed!${NC}"
+                    echo "========================================"
+                    echo ">>> IP & MAC Address check completed!"
                     echo ""
-                    echo "${YELLOW}>>> Waiting 20 seconds before returning to menu...${NC}"
+                    echo ">>> Waiting 20 seconds before returning to menu..."
                     sleep 20
                     ;;
                 7)
                     echo ""
-                    echo "${RED}═══════════════════════════════════════════════════════════════════════════════${NC}"
-                    echo "${RED}╔═════════════════════════════════════════════════════════════════════════════╗${NC}"
-                    echo "${RED}║                                                                             ║${NC}"
-                    echo "${RED}║                         ⚠️  DANGER! ⚠️                                      ║${NC}"
-                    echo "${RED}║                                                                             ║${NC}"
-                    echo "${RED}║  This operation will DELETE:                                                ║${NC}"
-                    echo "${RED}║  • All channels                                                             ║${NC}"
-                    echo "${RED}║  • All bouquets                                                             ║${NC}"
-                    echo "${RED}║  • All tuner settings                                                       ║${NC}"
-                    echo "${RED}║  • All softcam settings                                                     ║${NC}"
-                    echo "${RED}║  • All device settings                                                      ║${NC}"
-                    echo "${RED}║                                                                             ║${NC}"
-                    echo "${RED}║  🔴  This action CANNOT be undone!  🔴                                     ║${NC}"
-                    echo "${RED}║                                                                             ║${NC}"
-                    echo "${RED}║  The device will reboot automatically after reset                           ║${NC}"
-                    echo "${RED}║                                                                             ║${NC}"
-                    echo "${RED}╚═════════════════════════════════════════════════════════════════════════════╝${NC}"
-                    echo "${RED}═══════════════════════════════════════════════════════════════════════════════${NC}"
+                    echo "================================================"
+                    echo "           !!! DANGER - FACTORY RESET !!!        "
+                    echo "================================================"
+                    echo "  This will DELETE:                              "
+                    echo "  - All channels and bouquets                    "
+                    echo "  - All tuner settings                           "
+                    echo "  - All softcam settings                         "
+                    echo "  - All device settings                          "
+                    echo "                                                 "
+                    echo "  This action CANNOT be undone!                  "
+                    echo "================================================"
                     echo ""
-                    echo "${YELLOW}To confirm Factory Reset, type: ${RED}YES${NC}"
-                    printf "${YELLOW}Confirm: ${NC}"
+                    printf "To confirm Factory Reset, type: YES: "
                     read confirm_reset < /dev/tty
                     if [ "$confirm_reset" = "YES" ]; then
                         echo ""
-                        echo "${RED}>>> Starting Factory Reset...${NC}"
-                        echo "${RED}>>> Stopping Enigma2 (init 4)...${NC}"
+                        echo ">>> Starting Factory Reset..."
+                        echo ">>> Stopping Enigma2 (init 4)..."
                         init 4
                         sleep 2
-                        echo "${RED}>>> Deleting all settings (rm -rf /etc/enigma2/*)...${NC}"
+                        echo ">>> Deleting all settings (rm -rf /etc/enigma2/*)..."
                         rm -rf /etc/enigma2/*
-                        echo "${RED}>>> Rebooting device...${NC}"
+                        echo ">>> Rebooting device..."
                         sleep 2
-                        echo "${RED}>>> Rebooting now...${NC}"
+                        echo ">>> Rebooting now..."
                         reboot
                     else
                         echo ""
-                        echo "${GREEN}>>> Factory Reset cancelled.${NC}"
+                        echo ">>> Factory Reset cancelled."
                         sleep 2
                     fi
                     ;;
             esac
         done
-        echo "\n${GREEN}Operation complete!!!${NC}"
+        echo ""
+        echo "Operation complete!!!"
         sleep 3
     done
 }
@@ -711,9 +702,9 @@ menu_tools() {
 menu_backups() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}          BACKUPS           ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "          BACKUPS           "
+        echo "============================"
         echo ""
         echo "  1) Backup Tuner Settings"
         echo "  2) Restore Tuner Settings"
@@ -723,7 +714,7 @@ menu_backups() {
         echo ""
         echo "  0) BACK"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
@@ -734,11 +725,11 @@ menu_backups() {
                 1) items="${items}  - Backup Tuner Settings\n"          ; count=$((count+1)) ;;
                 2) items="${items}  - Restore Tuner Settings\n"          ; count=$((count+1)) ;;
                 3) items="${items}  - Backup Full Image (Coming soon)\n" ; count=$((count+1)) ;;
-                *) echo "${RED}Invalid option: $ch${NC}" ; sleep 1 ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
 
-        [ $count -eq 0 ] && { echo "${RED}No valid items selected!${NC}" ; sleep 1 ; continue; }
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
 
         confirm_installation "$items" "$count"
 
@@ -746,121 +737,106 @@ menu_backups() {
             case $ch in
                 1)
                     echo ""
-                    echo "${GREEN}>>> Creating backup of Tuner Settings...${NC}"
+                    echo ">>> Creating backup of Tuner Settings..."
                     echo ""
                     
-                    # Get image name
                     IMAGE_NAME=$(grep ^imageversion= /etc/image-version 2>/dev/null | cut -d= -f2 | tr -d ' ' || ( . /etc/issue 2>/dev/null && echo $DISTRO_NAME ) || echo "unknown")
-                    
-                    # Set backup filename
                     BACKUP_FILENAME="tuner_backup_${IMAGE_NAME}_$(date +%Y%m%d_%H%M%S).backup"
-                    
-                    # Determine backup location (prefer HDD, fallback to USB)
                     BACKUP_PATH=""
+
                     if [ -d "/media/hdd" ]; then
-                        # Check HDD free space (need at least 10MB = 10240 KB)
                         HDD_SPACE=$(df /media/hdd 2>/dev/null | awk 'NR==2 {print $4}')
                         if [ -n "$HDD_SPACE" ] && [ "$HDD_SPACE" -gt 10240 ]; then
                             BACKUP_PATH="/media/hdd"
-                            echo "${GREEN}>>> Using HDD for backup${NC}"
+                            echo ">>> Using HDD for backup"
                         else
-                            echo "${YELLOW}>>> HDD has insufficient space or not mounted, trying USB...${NC}"
+                            echo ">>> HDD has insufficient space or not mounted, trying USB..."
                         fi
                     fi
                     
-                    # If HDD not available, try USB
                     if [ -z "$BACKUP_PATH" ]; then
                         if [ -d "/media/usb" ]; then
                             USB_SPACE=$(df /media/usb 2>/dev/null | awk 'NR==2 {print $4}')
                             if [ -n "$USB_SPACE" ] && [ "$USB_SPACE" -gt 10240 ]; then
                                 BACKUP_PATH="/media/usb"
-                                echo "${GREEN}>>> Using USB for backup${NC}"
+                                echo ">>> Using USB for backup"
                             else
-                                echo "${RED}>>> USB has insufficient space or not mounted${NC}"
+                                echo ">>> USB has insufficient space or not mounted"
                             fi
                         else
-                            echo "${RED}>>> No USB storage found${NC}"
+                            echo ">>> No USB storage found"
                         fi
                     fi
                     
-                    # Create backup if storage is available
                     if [ -n "$BACKUP_PATH" ]; then
                         BACKUP_FILE="${BACKUP_PATH}/${BACKUP_FILENAME}"
                         grep "config.Nims." /etc/enigma2/settings > "$BACKUP_FILE"
-                        
-                        # Check if backup was successful
                         if [ -f "$BACKUP_FILE" ]; then
                             FILE_SIZE=$(ls -lh "$BACKUP_FILE" | awk '{print $5}')
                             LINE_COUNT=$(wc -l < "$BACKUP_FILE")
                             echo ""
-                            echo "${GREEN}>>> Backup created successfully!${NC}"
-                            echo "${GREEN}>>> Location: ${BACKUP_FILE}${NC}"
-                            echo "${GREEN}>>> Size: ${FILE_SIZE}${NC}"
-                            echo "${GREEN}>>> Tuner settings: ${LINE_COUNT} entries${NC}"
+                            echo ">>> Backup created successfully!"
+                            echo ">>> Location: ${BACKUP_FILE}"
+                            echo ">>> Size: ${FILE_SIZE}"
+                            echo ">>> Tuner settings: ${LINE_COUNT} entries"
                         else
-                            echo "${RED}>>> Backup failed!${NC}"
+                            echo ">>> Backup failed!"
                         fi
                     else
                         echo ""
-                        echo "${RED}>>> No suitable storage found (HDD or USB)${NC}"
-                        echo "${RED}>>> Please check your storage devices${NC}"
+                        echo ">>> No suitable storage found (HDD or USB)"
+                        echo ">>> Please check your storage devices"
                     fi
                     ;;
                 2)
                     echo ""
-                    echo "${GREEN}>>> Starting Tuner Restore Process...${NC}"
+                    echo ">>> Starting Tuner Restore Process..."
                     echo ""
                     
-                    # Stop Enigma2
-                    echo "${YELLOW}>>> Stopping Enigma2 (init 4)...${NC}"
+                    echo ">>> Stopping Enigma2 (init 4)..."
                     init 4
                     sleep 2
                     
-                    # Show old settings (first 5 lines)
-                    echo "${YELLOW}>>> Old tuner settings (before restore):${NC}"
+                    echo ">>> Old tuner settings (before restore):"
                     grep "config.Nims." /etc/enigma2/settings 2>/dev/null | head -n5
                     echo ""
                     
-                    # Search for backup file
-                    echo "${YELLOW}>>> Searching for backup file...${NC}"
+                    echo ">>> Searching for backup file..."
                     BACKUP_FILE=$(ls /media/hdd/tuner_backup_*.backup 2>/dev/null | head -n1 || ls /media/usb/tuner_backup_*.backup 2>/dev/null | head -n1)
                     
                     if [ -f "$BACKUP_FILE" ]; then
-                        echo "${GREEN}>>> Backup found: ${BACKUP_FILE}${NC}"
+                        echo ">>> Backup found: ${BACKUP_FILE}"
                         echo ""
                         
-                        # Remove old tuner settings
-                        echo "${YELLOW}>>> Removing old tuner settings...${NC}"
+                        echo ">>> Removing old tuner settings..."
                         sed -i '/config.Nims./d' /etc/enigma2/settings
                         
-                        # Restore new tuner settings
-                        echo "${YELLOW}>>> Restoring new tuner settings...${NC}"
+                        echo ">>> Restoring new tuner settings..."
                         cat "$BACKUP_FILE" >> /etc/enigma2/settings
                         
-                        # Show new settings (first 5 lines)
                         echo ""
-                        echo "${YELLOW}>>> New tuner settings (after restore):${NC}"
+                        echo ">>> New tuner settings (after restore):"
                         grep "config.Nims." /etc/enigma2/settings 2>/dev/null | head -n5
                         echo ""
                         
-                        echo "${GREEN}>>> Restored successfully from: ${BACKUP_FILE}${NC}"
+                        echo ">>> Restored successfully from: ${BACKUP_FILE}"
                     else
-                        echo "${RED}>>> Error: No backup file found in /media/hdd or /media/usb${NC}"
+                        echo ">>> Error: No backup file found in /media/hdd or /media/usb"
                     fi
                     
-                    # Restart Enigma2
                     echo ""
-                    echo "${GREEN}>>> Restarting Enigma2 (init 3)...${NC}"
+                    echo ">>> Restarting Enigma2 (init 3)..."
                     init 3
-                    echo "${GREEN}>>> Tuner Restore Process completed!${NC}"
+                    echo ">>> Tuner Restore Process completed!"
                     ;;
                 3)
                     echo ""
-                    echo "${YELLOW}>>> Coming soon...${NC}"
+                    echo ">>> Coming soon..."
                     ;;
             esac
         done
-        echo "\n${GREEN}Operation complete!!!${NC}"
+        echo ""
+        echo "Operation complete!!!"
         sleep 3
     done
 }
@@ -871,10 +847,10 @@ menu_backups() {
 menu_main() {
     while true; do
         clear
-        echo "${CYAN}============================${NC}"
-        echo "${CYAN}      Enigma2 Manager       ${NC}"
-        echo "${CYAN}         by Karim           ${NC}"
-        echo "${CYAN}============================${NC}"
+        echo "============================"
+        echo "      Enigma2 Manager       "
+        echo "         by Karim           "
+        echo "============================"
         echo ""
         echo "  1) PLUGINS & PANELS"
         echo "  2) SKINS"
@@ -885,7 +861,7 @@ menu_main() {
         echo ""
         echo "  0) EXIT"
         echo ""
-        printf "${YELLOW}Choose: ${NC}"
+        printf "Choose: "
         choice=$(get_input)
         case $choice in
             1) menu_plugins_panels ;;
@@ -896,20 +872,20 @@ menu_main() {
             6) menu_backups ;;
             0)
                 clear
-                echo "${CYAN}========================================${NC}"
-                echo "${CYAN}      Enigma2 Manager - by Karim       ${NC}"
-                echo "${CYAN}========================================${NC}"
+                echo "========================================"
+                echo "      Enigma2 Manager - by Karim       "
+                echo "========================================"
                 echo ""
-                echo "${GREEN}      Thank you for using Enigma2 Manager${NC}"
+                echo "      Thank you for using Enigma2 Manager"
                 echo ""
-                echo "${YELLOW}      Your device has been successfully managed!${NC}"
-                echo "${YELLOW}              See you next time! 👋${NC}"
+                echo "      Your device has been successfully managed!"
+                echo "              See you next time! 👋"
                 echo ""
-                echo "${CYAN}========================================${NC}"
+                echo "========================================"
                 echo ""
                 exit 0
                 ;;
-            *) echo "${RED}Invalid option!${NC}" ; sleep 1 ;;
+            *) echo "Invalid option!" ; sleep 1 ;;
         esac
     done
 }
