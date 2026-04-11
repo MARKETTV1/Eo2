@@ -133,7 +133,7 @@ menu_plugins_panels() {
         echo " 12) MyTranslator"
 		echo " 13) MagicPanelGold"
         echo ""
-        echo "  Example: 1 or 1,2 or 1-11 or 1 3 5"
+        echo "  Example: 1 or 1,2 or 1-13 or 1 3 5"
         echo ""
         echo "  0) BACK"
         echo ""
