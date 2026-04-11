@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - Karim (No Colors Version)
+#           ENIGMA2 MANAGER - Karim
 # ============================================================
 
 # ============================================================
@@ -61,7 +61,7 @@ install_ipk() {
 }
 
 # ============================================================
-# Function to confirm installation
+# Function to confirm installation (NO PROMPT - direct install)
 # ============================================================
 confirm_installation() {
     local items="$1"
@@ -82,22 +82,26 @@ confirm_installation() {
 }
 
 # ============================================================
-# Function to parse multiple choices
+# Function to parse multiple choices (supports , - and spaces)
 # ============================================================
 parse_choices() {
     local input="$1"
     local result=""
     
+    # First replace commas with spaces
     input=$(echo "$input" | tr ',' ' ' | tr -s ' ')
     
+    # Process each part
     for part in $input; do
         if echo "$part" | grep -q '-'; then
+            # Handle range like 1-4
             start=$(echo "$part" | cut -d'-' -f1)
             end=$(echo "$part" | cut -d'-' -f2)
             for i in $(seq $start $end); do
                 result="$result $i"
             done
         else
+            # Handle single number
             result="$result $part"
         fi
     done
@@ -125,8 +129,10 @@ menu_plugins_panels() {
         echo "  8) E2BissKeyEditor"
         echo "  9) Satelliweb"
         echo " 10) FootOnsat"
+        echo " 11) NewVirtualkeyboard"
+        echo " 12) MyTranslator"
         echo ""
-        echo "  Example: 1 or 1,2 or 1-10 or 1 3 5"
+        echo "  Example: 1 or 1,2 or 1-11 or 1 3 5"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -148,6 +154,8 @@ menu_plugins_panels() {
                 8) items="${items}  - E2BissKeyEditor\n" ; count=$((count+1)) ;;
                 9) items="${items}  - Satelliweb\n" ; count=$((count+1)) ;;
                10) items="${items}  - FootOnsat\n" ; count=$((count+1)) ;;
+               11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
+               12) items="${items}  - MyTranslator\n" ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -181,6 +189,8 @@ menu_plugins_panels() {
                 8) install_package "E2BissKeyEditor" "https://raw.githubusercontent.com/ismail9875/E2BissKeyEditor/refs/heads/main/installer.sh" ;;
                 9) install_package "Satelliweb" "http://dreambox4u.com/dreamarabia/Satelliweb_e2/install_satelliweb.sh" ;;
                10) install_package "FootOnsat" "https://raw.githubusercontent.com/fairbird/FootOnsat/main/Download/install.sh" ;;
+               11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
+			   12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
             esac
         done
         echo ""
@@ -337,6 +347,7 @@ menu_skins() {
         echo "  2) ALL IMAGES"
         echo "  3) EGAMI SKINS"
         echo "  4) OPENBH SKINS"
+        echo "  5) OTHER SKINS"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -347,9 +358,69 @@ menu_skins() {
             2) menu_all_images ;;
             3) menu_egami_skins ;;
             4) menu_openbh_skins ;;
+            5) menu_other_skins ;;
             0) menu_main; return ;;
             *) echo "Invalid option!" ; sleep 1 ;;
         esac
+    done
+}
+
+# ============================================================
+#                     OTHER SKINS
+# ============================================================
+menu_other_skins() {
+    while true; do
+        clear
+        echo "============================"
+        echo "        OTHER SKINS         "
+        echo "============================"
+        echo ""
+        echo "  1) Maxy-FHD by MNASR"
+        echo "  2) XDREAMY"
+        echo "  3) eam_Nitro-by_BoHlal"
+        echo "  4) premium-fhd-black"
+        echo "  5) premium-fhd-blue"
+        echo "  6) premium-fhd-magenta"
+        echo ""
+        echo "  Example: 1 or 1,2 or 1-6 or 1 2 3"
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_skins; return; }
+
+        items="" ; count=0
+        for ch in $(parse_choices "$choice"); do
+            case $ch in
+                1) items="${items}  - Maxy-FHD by MNASR\n" ; count=$((count+1)) ;;
+                2) items="${items}  - XDREAMY\n"           ; count=$((count+1)) ;;
+                3) items="${items}  - eam_Nitro-by_BoHlal\n" ; count=$((count+1)) ;;
+                4) items="${items}  - premium-fhd-black\n" ; count=$((count+1)) ;;
+                5) items="${items}  - premium-fhd-blue\n"  ; count=$((count+1)) ;;
+                6) items="${items}  - premium-fhd-magenta\n" ; count=$((count+1)) ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
+            esac
+        done
+
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+
+        confirm_installation "$items" "$count"
+
+        for ch in $(parse_choices "$choice"); do
+            case $ch in
+                1) install_package "Maxy-FHD by MNASR" "https://raw.githubusercontent.com/popking159/skins/refs/heads/main/maxyatv/installer.sh" ;;
+                2) install_package "XDREAMY" "https://raw.githubusercontent.com/Insprion80/Skins/main/xDreamy/installer.sh" ;;
+                3) install_package "eam_Nitro-by_BoHlal" "https://raw.githubusercontent.com/biko-73/TeamNitro/main/script/installerB.sh" ;;
+                4) install_package "premium-fhd-black" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-black.sh" ;;
+                5) install_package "premium-fhd-blue" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-blue.sh" ;;
+                6) install_package "premium-fhd-magenta" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-_magenta.sh" ;;
+            esac
+        done
+        echo ""
+        echo "Installation complete!!!"
+        sleep 2
     done
 }
 
@@ -428,9 +499,9 @@ menu_softcam() {
         echo "         SOFTCAM            "
         echo "============================"
         echo ""
-        echo "  1) OSCam (MARKETTV1)"
-        echo "  2) NCam"
-        echo "  3) CCcam"
+        echo "  1) OSCam 11946 (compiled by levi5)"
+        echo "  2) NCam (Latest version)"
+        echo "  3) Add OpenATV Feed (SoftCAM)"
         echo "  4) OSCamicam_Kitte888"
         echo ""
         echo "  Example: 1 or 1,2 or 1-4 or 1 2 3"
@@ -445,10 +516,10 @@ menu_softcam() {
         items="" ; count=0
         for ch in $(parse_choices "$choice"); do
             case $ch in
-                1) items="${items}  - OSCam (MARKETTV1)\n"      ; count=$((count+1)) ;;
-                2) items="${items}  - NCam\n"                   ; count=$((count+1)) ;;
-                3) items="${items}  - CCcam\n"                  ; count=$((count+1)) ;;
-                4) items="${items}  - OSCamicam_Kitte888\n"     ; count=$((count+1)) ;;
+                1) items="${items}  - OSCam 11946 (compiled by levi5)\n" ; count=$((count+1)) ;;
+                2) items="${items}  - NCam (Latest version)\n"           ; count=$((count+1)) ;;
+                3) items="${items}  - Add OpenATV Feed (SoftCAM)\n"      ; count=$((count+1)) ;;
+                4) items="${items}  - OSCamicam_Kitte888\n"              ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -459,9 +530,16 @@ menu_softcam() {
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
-                1) install_package "OSCam (MARKETTV1)"   "https://raw.githubusercontent.com/MARKETTV1/softcams/refs/heads/main/oscam.sh" ;;
-                2) install_package "NCam"                "https://raw.githubusercontent.com/biko-73/Ncam_EMU/main/installer.sh" ;;
-                3) install_opkg    "CCcam"               "enigma2-plugin-softcams-cccam" ;;
+                1) install_package "OSCam 11946 (compiled by levi5)" "https://raw.githubusercontent.com/MARKETTV1/softcams/refs/heads/main/OScam_Final%20version.sh" ;;
+                2) install_package "NCam (Latest version)" "https://raw.githubusercontent.com/biko-73/Ncam_EMU/main/installer.sh" ;;
+                3)
+                    echo ""
+                    echo ">>> Adding OpenATV Feed (SoftCAM)..."
+                    echo ""
+                    wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
+                    echo ""
+                    echo ">>> OpenATV Feed (SoftCAM) added successfully!"
+                    ;;
                 4) install_package "OSCamicam_Kitte888"  "https://raw.githubusercontent.com/biko-73/OSCamicam_Kitte888/main/installer.sh" ;;
             esac
         done
@@ -561,6 +639,9 @@ menu_tools() {
                     python3 --version
                     echo ""
                     echo ">>> Python3 version check completed!"
+                    echo ""
+                    echo ">>> Waiting 20 seconds before returning to menu..."
+                    sleep 20
                     ;;
                 6)
                     echo ""
@@ -572,6 +653,9 @@ menu_tools() {
                     echo ""
                     echo "========================================"
                     echo ">>> IP & MAC Address check completed!"
+                    echo ""
+                    echo ">>> Waiting 20 seconds before returning to menu..."
+                    sleep 20
                     ;;
                 7)
                     echo ""
@@ -585,6 +669,7 @@ menu_tools() {
                     echo "  - All device settings                          "
                     echo "                                                 "
                     echo "  This action CANNOT be undone!                  "
+                    echo "  The device will REBOOT completely!             "
                     echo "================================================"
                     echo ""
                     printf "To confirm Factory Reset, type: YES: "
@@ -594,9 +679,9 @@ menu_tools() {
                         echo ">>> Starting Factory Reset..."
                         echo ">>> Stopping Enigma2 (init 4)..."
                         init 4
-                        sleep 2
-                        echo ">>> Deleting all settings (rm -rf /etc/enigma2/*)..."
-                        rm -rf /etc/enigma2/*
+                        sleep 5
+                        echo ">>> Deleting all settings (rm -f /etc/enigma2/*)..."
+                        rm -f /etc/enigma2/*
                         echo ">>> Rebooting device..."
                         sleep 2
                         echo ">>> Rebooting now..."
@@ -791,16 +876,16 @@ menu_main() {
             6) menu_backups ;;
             0)
                 clear
-                echo "========================================"
-                echo "      Enigma2 Manager - by Karim       "
-                echo "========================================"
+                echo "==================================================="
+                echo "            Enigma2 Manager - by Karim             "
+                echo "==================================================="
                 echo ""
-                echo "      Thank you for using Enigma2 Manager"
+                echo "      Thank you for using Enigma2 Manager          "
                 echo ""
-                echo "      Your device has been successfully managed!"
+                echo "      Your device has been successfully managed!   "
                 echo "              See you next time! 👋"
                 echo ""
-                echo "========================================"
+                echo "===================================================="
                 echo ""
                 exit 0
                 ;;
