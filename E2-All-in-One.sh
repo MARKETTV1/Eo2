@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ============================================================
-#           ENIGMA2 MANAGER - Karim
+#          - ENIGMA2 MANAGER - (Karim Abu Rida)
 # ============================================================
 
 # ============================================================
@@ -566,8 +566,10 @@ menu_tools() {
         echo "  5) Check Python3 Version"
         echo "  6) Check IP & MAC Address"
         echo "  7) Factory Reset (!!! DANGER !!!)"
+		echo "  8) Factory Reset (!!! DANGER !!!)"
         echo ""
         echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
+
         echo ""
         echo "  0) BACK"
         echo ""
@@ -586,6 +588,7 @@ menu_tools() {
                 5) items="${items}  - Check Python3 Version\n"                ; count=$((count+1)) ;;
                 6) items="${items}  - Check IP & MAC Address\n"               ; count=$((count+1)) ;;
                 7) items="${items}  - Factory Reset (DANGER)\n"               ; count=$((count+1)) ;;
+                8) items="${items}  - fix_players.sh \n"                      ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -691,6 +694,12 @@ menu_tools() {
                         echo ">>> Factory Reset cancelled."
                         sleep 2
                     fi
+                    ;;
+                8)
+                    echo ""
+                    echo ">>> Install or reinstall PLAYERS "
+                    wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
+                    echo ">>> ALL PLAYERS FIXED successfully!"
                     ;;
             esac
         done
