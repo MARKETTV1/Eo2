@@ -886,13 +886,43 @@ menu_backups() {
 }
 
 # ============================================================
-#                    DOWNLOAD IMAGES (EMPTY)
+#                    DOWNLOAD IMAGES
 # ============================================================
 menu_download_images() {
     while true; do
         clear
         echo "============================"
         echo "     DOWNLOAD IMAGES        "
+        echo "============================"
+        echo ""
+        echo "  1) OpenATV"
+        echo "  2) OpenPLi"
+        echo ""
+        echo "  Example: 1 or 1,2 or 1-2"
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_main; return; }
+
+        case $choice in
+            1) menu_openatv_images ;;
+            2) menu_openpli_images ;;
+            *) echo "Invalid option!" ; sleep 1 ;;
+        esac
+    done
+}
+
+# ============================================================
+#                 OPENATV IMAGES (EMPTY)
+# ============================================================
+menu_openatv_images() {
+    while true; do
+        clear
+        echo "============================"
+        echo "       OPENATV IMAGES       "
         echo "============================"
         echo ""
         echo "  No images added yet."
@@ -903,7 +933,32 @@ menu_download_images() {
         printf "Choose: "
         choice=$(get_input)
 
-        [ "$choice" = "0" ] && { menu_main; return; }
+        [ "$choice" = "0" ] && { menu_download_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#                 OPENPLI IMAGES (EMPTY)
+# ============================================================
+menu_openpli_images() {
+    while true; do
+        clear
+        echo "============================"
+        echo "       OPENPLI IMAGES       "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_download_images; return; }
         
         echo "Invalid option!"
         sleep 1
