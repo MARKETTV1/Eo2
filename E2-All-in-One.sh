@@ -1077,13 +1077,47 @@ menu_openatv_v74() {
 }
 
 # ============================================================
-#                 OPENPLI IMAGES (EMPTY)
+#                 OPENPLI IMAGES
 # ============================================================
 menu_openpli_images() {
     while true; do
         clear
         echo "============================"
         echo "       OPENPLI IMAGES       "
+        echo "============================"
+        echo ""
+        echo "  1) V9.2"
+        echo "  2) V9.1"
+        echo "  3) V8.3"
+        echo "  4) V8.1"
+        echo ""
+        echo "  Example: 1 or 1,2 or 1-4 or 1 2 3"
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_download_images; return; }
+
+        case $choice in
+            1) menu_openpli_v92 ;;
+            2) menu_openpli_v91 ;;
+            3) menu_openpli_v83 ;;
+            4) menu_openpli_v81 ;;
+            *) echo "Invalid option!" ; sleep 1 ;;
+        esac
+    done
+}
+
+# ============================================================
+#              OPENPLI V9.2 IMAGES (EMPTY)
+# ============================================================
+menu_openpli_v92() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENPLI V9.2 IMAGES    "
         echo "============================"
         echo ""
         echo "  No images added yet."
@@ -1094,7 +1128,82 @@ menu_openpli_images() {
         printf "Choose: "
         choice=$(get_input)
 
-        [ "$choice" = "0" ] && { menu_download_images; return; }
+        [ "$choice" = "0" ] && { menu_openpli_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENPLI V9.1 IMAGES (EMPTY)
+# ============================================================
+menu_openpli_v91() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENPLI V9.1 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openpli_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENPLI V8.3 IMAGES (EMPTY)
+# ============================================================
+menu_openpli_v83() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENPLI V8.3 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openpli_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENPLI V8.1 IMAGES (EMPTY)
+# ============================================================
+menu_openpli_v81() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENPLI V8.1 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openpli_images; return; }
         
         echo "Invalid option!"
         sleep 1
