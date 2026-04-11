@@ -1,8 +1,9 @@
 # E2-All-in-One - Enigma2 Manager
 [![Version](https://img.shields.io/badge/Version_beta-1.2-blue.svg)]()
 [![Version](https://img.shields.io/badge/scripted_by-MARKETTV1-brightgreen?style=for-the-badge)]()
-** تحديث النظام، إعادة التشغيل، وإضافة feeds خاصة.
 
+
+---
 ---
 
 ## 🚀 طريقة التثبيت والاستخدام
