@@ -132,8 +132,9 @@ menu_plugins_panels() {
         echo " 11) NewVirtualkeyboard"
         echo " 12) MyTranslator"
         echo " 13) MagicPanelGold"
+		echo " 14) TMBD"
         echo ""
-        echo "  Example: 1 or 1,2 or 1-13 or 1 3 5"
+        echo "  Example: 1 or 1,2 or 1-14 or 1 3 5"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -158,6 +159,7 @@ menu_plugins_panels() {
                11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
                12) items="${items}  - MyTranslator\n" ; count=$((count+1)) ;;
                13) items="${items}  - MagicPanelGold\n" ; count=$((count+1)) ;;
+			   14) items="${items}  - TMBD\n" ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -194,6 +196,7 @@ menu_plugins_panels() {
                11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
                12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
                13) install_package "MagicPanelGold" "https://raw.githubusercontent.com/Ham-ahmed/G/refs/heads/main/MagicPanelGold-v9_install.sh" ;;
+			   14) install_package "TMBD" "https://raw.githubusercontent.com/biko-73/TMBD/main/installer.sh" ;;
             esac
         done
         echo ""
@@ -380,7 +383,7 @@ menu_other_skins() {
         echo ""
         echo "  1) Maxy-FHD by MNASR"
         echo "  2) XDREAMY"
-        echo "  3) eam_Nitro-by_BoHlal"
+        echo "  3) Team_Nitro-by_BoHlala"
         echo "  4) premium-fhd-black"
         echo "  5) premium-fhd-blue"
         echo "  6) premium-fhd-magenta"
@@ -399,7 +402,7 @@ menu_other_skins() {
             case $ch in
                 1) items="${items}  - Maxy-FHD by MNASR\n" ; count=$((count+1)) ;;
                 2) items="${items}  - XDREAMY\n"           ; count=$((count+1)) ;;
-                3) items="${items}  - eam_Nitro-by_BoHlal\n" ; count=$((count+1)) ;;
+                3) items="${items}  - Team_Nitro-by_BoHlala\n" ; count=$((count+1)) ;;
                 4) items="${items}  - premium-fhd-black\n" ; count=$((count+1)) ;;
                 5) items="${items}  - premium-fhd-blue\n"  ; count=$((count+1)) ;;
                 6) items="${items}  - premium-fhd-magenta\n" ; count=$((count+1)) ;;
@@ -415,7 +418,7 @@ menu_other_skins() {
             case $ch in
                 1) install_package "Maxy-FHD by MNASR" "https://raw.githubusercontent.com/popking159/skins/refs/heads/main/maxyatv/installer.sh" ;;
                 2) install_package "XDREAMY" "https://raw.githubusercontent.com/Insprion80/Skins/main/xDreamy/installer.sh" ;;
-                3) install_package "eam_Nitro-by_BoHlal" "https://raw.githubusercontent.com/biko-73/TeamNitro/main/script/installerB.sh" ;;
+                3) install_package "Team_Nitro-by_BoHlala" "https://raw.githubusercontent.com/biko-73/TeamNitro/main/script/installerB.sh" ;;
                 4) install_package "premium-fhd-black" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-black.sh" ;;
                 5) install_package "premium-fhd-blue" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-blue.sh" ;;
                 6) install_package "premium-fhd-magenta" "https://gitlab.com/hmeng80/skin-all/-/raw/main/premium-fhd/premium-fhd-_magenta.sh" ;;
@@ -925,7 +928,7 @@ menu_main() {
                 echo "      Your device has been successfully managed!   "
                 echo "              See you next time! 👋"
                 echo ""
-                echo "===================================================="
+                echo "==================================================="
                 echo ""
                 exit 0
                 ;;
