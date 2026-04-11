@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/badge/scripted_by-MARKETTV1-brightgreen?style=for-the-badge)]()
 
 
-[![Version](https://img.shields.io/badge/DEVLELOPEURS-KARIM_SAID_badr-blue)]()
+[![Version](https://img.shields.io/badge/DEVLELOPED_BY-KARIM_SAID_badr-blue)]()
 
 
 
