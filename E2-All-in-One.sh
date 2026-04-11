@@ -916,13 +916,49 @@ menu_download_images() {
 }
 
 # ============================================================
-#                 OPENATV IMAGES (EMPTY)
+#                 OPENATV IMAGES
 # ============================================================
 menu_openatv_images() {
     while true; do
         clear
         echo "============================"
         echo "       OPENATV IMAGES       "
+        echo "============================"
+        echo ""
+        echo "  1) V8.0"
+        echo "  2) V7.6"
+        echo "  3) V7.5.1"
+        echo "  4) V7.5"
+        echo "  5) V7.4"
+        echo ""
+        echo "  Example: 1 or 1,2 or 1-5 or 1 2 3"
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_download_images; return; }
+
+        case $choice in
+            1) menu_openatv_v80 ;;
+            2) menu_openatv_v76 ;;
+            3) menu_openatv_v751 ;;
+            4) menu_openatv_v75 ;;
+            5) menu_openatv_v74 ;;
+            *) echo "Invalid option!" ; sleep 1 ;;
+        esac
+    done
+}
+
+# ============================================================
+#              OPENATV V8.0 IMAGES (EMPTY)
+# ============================================================
+menu_openatv_v80() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENATV V8.0 IMAGES    "
         echo "============================"
         echo ""
         echo "  No images added yet."
@@ -933,7 +969,107 @@ menu_openatv_images() {
         printf "Choose: "
         choice=$(get_input)
 
-        [ "$choice" = "0" ] && { menu_download_images; return; }
+        [ "$choice" = "0" ] && { menu_openatv_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENATV V7.6 IMAGES (EMPTY)
+# ============================================================
+menu_openatv_v76() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENATV V7.6 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openatv_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENATV V7.5.1 IMAGES (EMPTY)
+# ============================================================
+menu_openatv_v751() {
+    while true; do
+        clear
+        echo "============================"
+        echo "   OPENATV V7.5.1 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openatv_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENATV V7.5 IMAGES (EMPTY)
+# ============================================================
+menu_openatv_v75() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENATV V7.5 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openatv_images; return; }
+        
+        echo "Invalid option!"
+        sleep 1
+    done
+}
+
+# ============================================================
+#              OPENATV V7.4 IMAGES (EMPTY)
+# ============================================================
+menu_openatv_v74() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     OPENATV V7.4 IMAGES    "
+        echo "============================"
+        echo ""
+        echo "  No images added yet."
+        echo "  Coming soon..."
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_openatv_images; return; }
         
         echo "Invalid option!"
         sleep 1
