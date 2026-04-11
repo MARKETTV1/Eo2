@@ -131,7 +131,7 @@ menu_plugins_panels() {
         echo " 10) FootOnsat"
         echo " 11) NewVirtualkeyboard"
         echo " 12) MyTranslator"
-		echo " 13) MagicPanelGold"
+        echo " 13) MagicPanelGold"
         echo ""
         echo "  Example: 1 or 1,2 or 1-13 or 1 3 5"
         echo ""
@@ -157,7 +157,7 @@ menu_plugins_panels() {
                10) items="${items}  - FootOnsat\n" ; count=$((count+1)) ;;
                11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
                12) items="${items}  - MyTranslator\n" ; count=$((count+1)) ;;
-			   13) items="${items}  - MagicPanelGold\n" ; count=$((count+1)) ;;
+               13) items="${items}  - MagicPanelGold\n" ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -192,8 +192,8 @@ menu_plugins_panels() {
                 9) install_package "Satelliweb" "http://dreambox4u.com/dreamarabia/Satelliweb_e2/install_satelliweb.sh" ;;
                10) install_package "FootOnsat" "https://raw.githubusercontent.com/fairbird/FootOnsat/main/Download/install.sh" ;;
                11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
-			   12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
-			   13) install_package "MagicPanelGold" "https://raw.githubusercontent.com/Ham-ahmed/G/refs/heads/main/MagicPanelGold-v9_install.sh" ;;
+               12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
+               13) install_package "MagicPanelGold" "https://raw.githubusercontent.com/Ham-ahmed/G/refs/heads/main/MagicPanelGold-v9_install.sh" ;;
             esac
         done
         echo ""
@@ -569,10 +569,9 @@ menu_tools() {
         echo "  5) Check Python3 Version"
         echo "  6) Check IP & MAC Address"
         echo "  7) Factory Reset (!!! DANGER !!!)"
-		echo "  8) Factory Reset (!!! DANGER !!!)"
+        echo "  8) fix_players.sh"
         echo ""
-        echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
-
+        echo "  Example: 1 or 1,2 or 1-8 or 1 2 3"
         echo ""
         echo "  0) BACK"
         echo ""
@@ -591,7 +590,7 @@ menu_tools() {
                 5) items="${items}  - Check Python3 Version\n"                ; count=$((count+1)) ;;
                 6) items="${items}  - Check IP & MAC Address\n"               ; count=$((count+1)) ;;
                 7) items="${items}  - Factory Reset (DANGER)\n"               ; count=$((count+1)) ;;
-                8) items="${items}  - fix_players.sh \n"                      ; count=$((count+1)) ;;
+                8) items="${items}  - fix_players.sh\n"                       ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -760,30 +759,59 @@ menu_backups() {
                     BACKUP_FILENAME="tuner_backup_${IMAGE_NAME}_$(date +%Y%m%d_%H%M%S).backup"
                     BACKUP_PATH=""
 
-                    if [ -d "/media/hdd" ]; then
+                    # Check HDD with ajpanel_backup folder
+                    if [ -d "/media/hdd/ajpanel_backup" ]; then
                         HDD_SPACE=$(df /media/hdd 2>/dev/null | awk 'NR==2 {print $4}')
                         if [ -n "$HDD_SPACE" ] && [ "$HDD_SPACE" -gt 10240 ]; then
-                            BACKUP_PATH="/media/hdd"
-                            echo ">>> Using HDD for backup"
+                            BACKUP_PATH="/media/hdd/ajpanel_backup"
+                            echo ">>> Using HDD/ajpanel_backup for backup"
                         else
-                            echo ">>> HDD has insufficient space or not mounted, trying USB..."
+                            echo ">>> HDD has insufficient space, trying USB..."
                         fi
-                    fi
-                    
-                    if [ -z "$BACKUP_PATH" ]; then
-                        if [ -d "/media/usb" ]; then
-                            USB_SPACE=$(df /media/usb 2>/dev/null | awk 'NR==2 {print $4}')
-                            if [ -n "$USB_SPACE" ] && [ "$USB_SPACE" -gt 10240 ]; then
-                                BACKUP_PATH="/media/usb"
-                                echo ">>> Using USB for backup"
+                    else
+                        echo ">>> /media/hdd/ajpanel_backup not found, trying to create..."
+                        mkdir -p /media/hdd/ajpanel_backup 2>/dev/null
+                        if [ -d "/media/hdd/ajpanel_backup" ]; then
+                            HDD_SPACE=$(df /media/hdd 2>/dev/null | awk 'NR==2 {print $4}')
+                            if [ -n "$HDD_SPACE" ] && [ "$HDD_SPACE" -gt 10240 ]; then
+                                BACKUP_PATH="/media/hdd/ajpanel_backup"
+                                echo ">>> Created and using HDD/ajpanel_backup for backup"
                             else
-                                echo ">>> USB has insufficient space or not mounted"
+                                echo ">>> HDD has insufficient space, trying USB..."
                             fi
                         else
-                            echo ">>> No USB storage found"
+                            echo ">>> Cannot create /media/hdd/ajpanel_backup, trying USB..."
                         fi
                     fi
                     
+                    # If HDD not available, try USB with ajpanel_backup folder
+                    if [ -z "$BACKUP_PATH" ]; then
+                        if [ -d "/media/usb/ajpanel_backup" ]; then
+                            USB_SPACE=$(df /media/usb 2>/dev/null | awk 'NR==2 {print $4}')
+                            if [ -n "$USB_SPACE" ] && [ "$USB_SPACE" -gt 10240 ]; then
+                                BACKUP_PATH="/media/usb/ajpanel_backup"
+                                echo ">>> Using USB/ajpanel_backup for backup"
+                            else
+                                echo ">>> USB has insufficient space"
+                            fi
+                        else
+                            echo ">>> /media/usb/ajpanel_backup not found, trying to create..."
+                            mkdir -p /media/usb/ajpanel_backup 2>/dev/null
+                            if [ -d "/media/usb/ajpanel_backup" ]; then
+                                USB_SPACE=$(df /media/usb 2>/dev/null | awk 'NR==2 {print $4}')
+                                if [ -n "$USB_SPACE" ] && [ "$USB_SPACE" -gt 10240 ]; then
+                                    BACKUP_PATH="/media/usb/ajpanel_backup"
+                                    echo ">>> Created and using USB/ajpanel_backup for backup"
+                                else
+                                    echo ">>> USB has insufficient space"
+                                fi
+                            else
+                                echo ">>> Cannot create /media/usb/ajpanel_backup"
+                            fi
+                        fi
+                    fi
+                    
+                    # Create backup if storage is available
                     if [ -n "$BACKUP_PATH" ]; then
                         BACKUP_FILE="${BACKUP_PATH}/${BACKUP_FILENAME}"
                         grep "config.Nims." /etc/enigma2/settings > "$BACKUP_FILE"
@@ -800,7 +828,7 @@ menu_backups() {
                         fi
                     else
                         echo ""
-                        echo ">>> No suitable storage found (HDD or USB)"
+                        echo ">>> No suitable storage found (HDD or USB with ajpanel_backup)"
                         echo ">>> Please check your storage devices"
                     fi
                     ;;
@@ -817,8 +845,8 @@ menu_backups() {
                     grep "config.Nims." /etc/enigma2/settings 2>/dev/null | head -n5
                     echo ""
                     
-                    echo ">>> Searching for backup file..."
-                    BACKUP_FILE=$(ls /media/hdd/tuner_backup_*.backup 2>/dev/null | head -n1 || ls /media/usb/tuner_backup_*.backup 2>/dev/null | head -n1)
+                    echo ">>> Searching for backup file in /media/hdd/ajpanel_backup and /media/usb/ajpanel_backup..."
+                    BACKUP_FILE=$(ls /media/hdd/ajpanel_backup/tuner_backup_*.backup 2>/dev/null | head -n1 || ls /media/usb/ajpanel_backup/tuner_backup_*.backup 2>/dev/null | head -n1)
                     
                     if [ -f "$BACKUP_FILE" ]; then
                         echo ">>> Backup found: ${BACKUP_FILE}"
@@ -837,7 +865,7 @@ menu_backups() {
                         
                         echo ">>> Restored successfully from: ${BACKUP_FILE}"
                     else
-                        echo ">>> Error: No backup file found in /media/hdd or /media/usb"
+                        echo ">>> Error: No backup file found in /media/hdd/ajpanel_backup or /media/usb/ajpanel_backup"
                     fi
                     
                     echo ""
