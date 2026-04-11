@@ -1,18 +1,7 @@
 # E2-All-in-One - Enigma2 Manager
 [![Version](https://img.shields.io/badge/Version_beta-1.2-blue.svg)]()
 [![Version](https://img.shields.io/badge/scripted_by-MARKETTV1-brightgreen?style=for-the-badge)]()
-
-أداة عربية متكاملة ومتعددة الاستخدامات لإدارة وتثبيت الإضافات على أجهزة **Enigma2** (مثل دريم بوكس، فيو بلس، وغيرها). تم تطويرها بواسطة **MARKETTV1**.
-
----
-
-## ✨ المميزات الرئيسية
-
-- **مركز للإضافات (Plugins & Panels):** تثبيت أشهر البانيلات مثل AjPanel و Linuxsat Panel.
-- **مكتبة سكينات (Skins):** تغيير واجهة جهازك بسهولة.
-- **مشغلات ووسائط (Medias):** تثبيت أدوات xtreamity و xclass لمشاهدة IPTV.
-- **سوفت كام (Softcam):** تثبيت إصدارات مختلفة من OSCam و NCam.
-- **أدوات الصيانة:** تحديث النظام، إعادة التشغيل، وإضافة feeds خاصة.
+** تحديث النظام، إعادة التشغيل، وإضافة feeds خاصة.
 
 ---
 
