@@ -886,7 +886,7 @@ menu_backups() {
 }
 
 # ============================================================
-#                    DOWNLOAD IMAGES
+#                    DOWNLOAD IMAGES (EMPTY)
 # ============================================================
 menu_download_images() {
     while true; do
@@ -895,10 +895,8 @@ menu_download_images() {
         echo "     DOWNLOAD IMAGES        "
         echo "============================"
         echo ""
-        echo "  1) OpenATV"
-        echo "  2) OpenPLi"
-        echo ""
-        echo "  Example: 1 or 1,2 or 1-2"
+        echo "  No images added yet."
+        echo "  Coming soon..."
         echo ""
         echo "  0) BACK"
         echo ""
@@ -906,92 +904,9 @@ menu_download_images() {
         choice=$(get_input)
 
         [ "$choice" = "0" ] && { menu_main; return; }
-
-        items="" ; count=0
-        for ch in $(parse_choices "$choice"); do
-            case $ch in
-                1) items="${items}  - OpenATV\n" ; count=$((count+1)) ;;
-                2) items="${items}  - OpenPLi\n" ; count=$((count+1)) ;;
-                *) echo "Invalid option: $ch" ; sleep 1 ;;
-            esac
-        done
-
-        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
-
-        confirm_installation "$items" "$count"
-
-        for ch in $(parse_choices "$choice"); do
-            case $ch in
-                1)
-                    echo ""
-                    echo ">>> OpenATV Download Links:"
-                    echo "========================================"
-                    echo ""
-                    echo "  OpenATV 7.4:"
-                    echo "    - https://images.openatv.net/7.4/"
-                    echo ""
-                    echo "  OpenATV 7.5:"
-                    echo "    - https://images.openatv.net/7.5/"
-                    echo ""
-                    echo "  OpenATV 7.6:"
-                    echo "    - https://images.openatv.net/7.6/"
-                    echo ""
-                    echo "  OpenATV 8.0:"
-                    echo "    - https://images.openatv.net/8.0/"
-                    echo ""
-                    echo "  OpenATV 8.1:"
-                    echo "    - https://images.openatv.net/8.1/"
-                    echo ""
-                    echo "  OpenATV 8.2:"
-                    echo "    - https://images.openatv.net/8.2/"
-                    echo ""
-                    echo "  OpenATV 8.3:"
-                    echo "    - https://images.openatv.net/8.3/"
-                    echo ""
-                    echo "  OpenATV 8.4:"
-                    echo "    - https://images.openatv.net/8.4/"
-                    echo ""
-                    echo "========================================"
-                    echo ""
-                    echo "  To download for specific box, add box name:"
-                    echo "  Example: https://images.openatv.net/7.4/vuplus/"
-                    echo "           https://images.openatv.net/7.4/dreambox/"
-                    echo "           https://images.openatv.net/7.4/zgemma/"
-                    echo "           https://images.openatv.net/7.4/octagon/"
-                    echo "           https://images.openatv.net/7.4/gigablue/"
-                    echo "========================================"
-                    ;;
-                2)
-                    echo ""
-                    echo ">>> OpenPLi Download Links:"
-                    echo "========================================"
-                    echo ""
-                    echo "  Official Website:"
-                    echo "    - https://openpli.org/download"
-                    echo ""
-                    echo "  Direct Downloads:"
-                    echo "    - Vu+ : https://downloads.openpli.org/vuplus/"
-                    echo "    - Dreambox : https://downloads.openpli.org/dreambox/"
-                    echo "    - Xtrend : https://downloads.openpli.org/xtrend/"
-                    echo "    - Gigablue : https://downloads.openpli.org/gigablue/"
-                    echo "    - Zgemma : https://downloads.openpli.org/zgemma/"
-                    echo "    - Octagon : https://downloads.openpli.org/octagon/"
-                    echo ""
-                    echo "  Latest Release:"
-                    echo "    - https://downloads.openpli.org/release/"
-                    echo ""
-                    echo "  Developer Builds:"
-                    echo "    - https://downloads.openpli.org/develop/"
-                    echo "========================================"
-                    ;;
-            esac
-        done
-        echo ""
-        echo ">>> Copy the links and use wget to download"
-        echo ">>> Example: wget https://images.openatv.net/7.4/vuplus/xxx.zip"
-        echo ""
-        echo "Operation complete!!!"
-        sleep 5
+        
+        echo "Invalid option!"
+        sleep 1
     done
 }
 
