@@ -1089,7 +1089,7 @@ menu_openpli_images() {
         echo "  1) V9.2"
         echo "  2) V9.1"
         echo "  3) V8.3"
-        echo "  4) V8.1"
+        echo "  4) Scarthgap builds"
         echo ""
         echo "  Example: 1 or 1,2 or 1-4 or 1 2 3"
         echo ""
@@ -1104,7 +1104,7 @@ menu_openpli_images() {
             1) menu_openpli_v92 ;;
             2) menu_openpli_v91 ;;
             3) menu_openpli_v83 ;;
-            4) menu_openpli_v81 ;;
+            4) menu_openpli_scarthgap ;;
             *) echo "Invalid option!" ; sleep 1 ;;
         esac
     done
@@ -1186,13 +1186,13 @@ menu_openpli_v83() {
 }
 
 # ============================================================
-#              OPENPLI V8.1 IMAGES (EMPTY)
+#         OPENPLI SCARTHGAP BUILDS IMAGES (EMPTY)
 # ============================================================
-menu_openpli_v81() {
+menu_openpli_scarthgap() {
     while true; do
         clear
         echo "============================"
-        echo "     OPENPLI V8.1 IMAGES    "
+        echo "  OPENPLI SCARTHGAP BUILDS  "
         echo "============================"
         echo ""
         echo "  No images added yet."
