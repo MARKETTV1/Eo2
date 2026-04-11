@@ -132,7 +132,7 @@ menu_plugins_panels() {
         echo " 11) NewVirtualkeyboard"
         echo " 12) MyTranslator"
         echo " 13) MagicPanelGold"
-		echo " 14) TMBD"
+        echo " 14) TMBD"
         echo ""
         echo "  Example: 1 or 1,2 or 1-14 or 1 3 5"
         echo ""
@@ -159,7 +159,7 @@ menu_plugins_panels() {
                11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
                12) items="${items}  - MyTranslator\n" ; count=$((count+1)) ;;
                13) items="${items}  - MagicPanelGold\n" ; count=$((count+1)) ;;
-			   14) items="${items}  - TMBD\n" ; count=$((count+1)) ;;
+               14) items="${items}  - TMBD\n" ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -196,7 +196,7 @@ menu_plugins_panels() {
                11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
                12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
                13) install_package "MagicPanelGold" "https://raw.githubusercontent.com/Ham-ahmed/G/refs/heads/main/MagicPanelGold-v9_install.sh" ;;
-			   14) install_package "TMBD" "https://raw.githubusercontent.com/biko-73/TMBD/main/installer.sh" ;;
+               14) install_package "TMBD" "https://raw.githubusercontent.com/biko-73/TMBD/main/installer.sh" ;;
             esac
         done
         echo ""
@@ -762,7 +762,6 @@ menu_backups() {
                     BACKUP_FILENAME="tuner_backup_${IMAGE_NAME}_$(date +%Y%m%d_%H%M%S).backup"
                     BACKUP_PATH=""
 
-                    # Check HDD with ajpanel_backup folder
                     if [ -d "/media/hdd/ajpanel_backup" ]; then
                         HDD_SPACE=$(df /media/hdd 2>/dev/null | awk 'NR==2 {print $4}')
                         if [ -n "$HDD_SPACE" ] && [ "$HDD_SPACE" -gt 10240 ]; then
@@ -787,7 +786,6 @@ menu_backups() {
                         fi
                     fi
                     
-                    # If HDD not available, try USB with ajpanel_backup folder
                     if [ -z "$BACKUP_PATH" ]; then
                         if [ -d "/media/usb/ajpanel_backup" ]; then
                             USB_SPACE=$(df /media/usb 2>/dev/null | awk 'NR==2 {print $4}')
@@ -814,7 +812,6 @@ menu_backups() {
                         fi
                     fi
                     
-                    # Create backup if storage is available
                     if [ -n "$BACKUP_PATH" ]; then
                         BACKUP_FILE="${BACKUP_PATH}/${BACKUP_FILENAME}"
                         grep "config.Nims." /etc/enigma2/settings > "$BACKUP_FILE"
@@ -889,6 +886,169 @@ menu_backups() {
 }
 
 # ============================================================
+#                    DOWNLOAD IMAGES
+# ============================================================
+menu_download_images() {
+    while true; do
+        clear
+        echo "============================"
+        echo "     DOWNLOAD IMAGES        "
+        echo "============================"
+        echo ""
+        echo "  1) OpenATV 7.4"
+        echo "  2) OpenATV 7.5"
+        echo "  3) OpenPLi"
+        echo "  4) OpenBH"
+        echo "  5) Egami"
+        echo "  6) SatDreamGr"
+        echo "  7) Pure2"
+        echo ""
+        echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
+        echo ""
+        echo "  0) BACK"
+        echo ""
+        printf "Choose: "
+        choice=$(get_input)
+
+        [ "$choice" = "0" ] && { menu_main; return; }
+
+        items="" ; count=0
+        for ch in $(parse_choices "$choice"); do
+            case $ch in
+                1) items="${items}  - OpenATV 7.4\n" ; count=$((count+1)) ;;
+                2) items="${items}  - OpenATV 7.5\n" ; count=$((count+1)) ;;
+                3) items="${items}  - OpenPLi\n"      ; count=$((count+1)) ;;
+                4) items="${items}  - OpenBH\n"       ; count=$((count+1)) ;;
+                5) items="${items}  - Egami\n"        ; count=$((count+1)) ;;
+                6) items="${items}  - SatDreamGr\n"   ; count=$((count+1)) ;;
+                7) items="${items}  - Pure2\n"        ; count=$((count+1)) ;;
+                *) echo "Invalid option: $ch" ; sleep 1 ;;
+            esac
+        done
+
+        [ $count -eq 0 ] && { echo "No valid items selected!" ; sleep 1 ; continue; }
+
+        confirm_installation "$items" "$count"
+
+        for ch in $(parse_choices "$choice"); do
+            case $ch in
+                1)
+                    echo ""
+                    echo ">>> OpenATV 7.4 Download Links:"
+                    echo "========================================"
+                    echo "  Vu+ Series:"
+                    echo "    - https://images.openatv.net/7.4/vuplus/"
+                    echo ""
+                    echo "  Dreambox Series:"
+                    echo "    - https://images.openatv.net/7.4/dreambox/"
+                    echo ""
+                    echo "  Octagon Series:"
+                    echo "    - https://images.openatv.net/7.4/octagon/"
+                    echo ""
+                    echo "  Zgemma Series:"
+                    echo "    - https://images.openatv.net/7.4/zgemma/"
+                    echo ""
+                    echo "  Gigablue Series:"
+                    echo "    - https://images.openatv.net/7.4/gigablue/"
+                    echo "========================================"
+                    ;;
+                2)
+                    echo ""
+                    echo ">>> OpenATV 7.5 Download Links:"
+                    echo "========================================"
+                    echo "  Vu+ Series:"
+                    echo "    - https://images.openatv.net/7.5/vuplus/"
+                    echo ""
+                    echo "  Dreambox Series:"
+                    echo "    - https://images.openatv.net/7.5/dreambox/"
+                    echo ""
+                    echo "  Octagon Series:"
+                    echo "    - https://images.openatv.net/7.5/octagon/"
+                    echo ""
+                    echo "  Zgemma Series:"
+                    echo "    - https://images.openatv.net/7.5/zgemma/"
+                    echo ""
+                    echo "  Gigablue Series:"
+                    echo "    - https://images.openatv.net/7.5/gigablue/"
+                    echo "========================================"
+                    ;;
+                3)
+                    echo ""
+                    echo ">>> OpenPLi Download Links:"
+                    echo "========================================"
+                    echo "  Official Website: https://openpli.org/download"
+                    echo ""
+                    echo "  Direct Downloads:"
+                    echo "    - Vu+ : https://downloads.openpli.org/vuplus/"
+                    echo "    - Dreambox : https://downloads.openpli.org/dreambox/"
+                    echo "    - Xtrend : https://downloads.openpli.org/xtrend/"
+                    echo "    - Gigablue : https://downloads.openpli.org/gigablue/"
+                    echo "========================================"
+                    ;;
+                4)
+                    echo ""
+                    echo ">>> OpenBH Download Links:"
+                    echo "========================================"
+                    echo "  Official Website: https://www.openbh.net/download/"
+                    echo ""
+                    echo "  Direct Downloads:"
+                    echo "    - Vu+ : https://images.openbh.net/vuplus/"
+                    echo "    - Dreambox : https://images.openbh.net/dreambox/"
+                    echo "    - Zgemma : https://images.openbh.net/zgemma/"
+                    echo "    - Octagon : https://images.openbh.net/octagon/"
+                    echo "========================================"
+                    ;;
+                5)
+                    echo ""
+                    echo ">>> Egami Download Links:"
+                    echo "========================================"
+                    echo "  Official Website: https://www.egami-image.com/download/"
+                    echo ""
+                    echo "  Direct Downloads:"
+                    echo "    - Vu+ : https://images.egami-image.com/vuplus/"
+                    echo "    - Dreambox : https://images.egami-image.com/dreambox/"
+                    echo "    - Zgemma : https://images.egami-image.com/zgemma/"
+                    echo "    - Octagon : https://images.egami-image.com/octagon/"
+                    echo "========================================"
+                    ;;
+                6)
+                    echo ""
+                    echo ">>> SatDreamGr Download Links:"
+                    echo "========================================"
+                    echo "  Official Website: https://www.satdreamgr.com/download/"
+                    echo ""
+                    echo "  Direct Downloads:"
+                    echo "    - Vu+ : https://images.satdreamgr.com/vuplus/"
+                    echo "    - Dreambox : https://images.satdreamgr.com/dreambox/"
+                    echo "    - Zgemma : https://images.satdreamgr.com/zgemma/"
+                    echo "    - Octagon : https://images.satdreamgr.com/octagon/"
+                    echo "========================================"
+                    ;;
+                7)
+                    echo ""
+                    echo ">>> Pure2 Download Links:"
+                    echo "========================================"
+                    echo "  Official Website: https://www.pur-e2.club/OU/images/"
+                    echo ""
+                    echo "  Direct Downloads:"
+                    echo "    - Vu+ : https://pur-e2.club/OU/images/vuplus/"
+                    echo "    - Dreambox : https://pur-e2.club/OU/images/dreambox/"
+                    echo "    - Zgemma : https://pur-e2.club/OU/images/zgemma/"
+                    echo "    - Octagon : https://pur-e2.club/OU/images/octagon/"
+                    echo "========================================"
+                    ;;
+            esac
+        done
+        echo ""
+        echo ">>> Copy the links and use wget to download"
+        echo ">>> Example: wget https://images.openatv.net/7.4/vuplus/xxx.zip"
+        echo ""
+        echo "Operation complete!!!"
+        sleep 5
+    done
+}
+
+# ============================================================
 #                   MAIN MENU
 # ============================================================
 menu_main() {
@@ -905,6 +1065,7 @@ menu_main() {
         echo "  4) SOFTCAM"
         echo "  5) TOOLS"
         echo "  6) BACKUPS"
+        echo "  7) DOWNLOAD IMAGES"
         echo ""
         echo "  0) EXIT"
         echo ""
@@ -917,6 +1078,7 @@ menu_main() {
             4) menu_softcam ;;
             5) menu_tools ;;
             6) menu_backups ;;
+            7) menu_download_images ;;
             0)
                 clear
                 echo "==================================================="
