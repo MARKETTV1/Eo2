@@ -131,6 +131,7 @@ menu_plugins_panels() {
         echo " 10) FootOnsat"
         echo " 11) NewVirtualkeyboard"
         echo " 12) MyTranslator"
+		echo " 13) MagicPanelGold"
         echo ""
         echo "  Example: 1 or 1,2 or 1-11 or 1 3 5"
         echo ""
@@ -156,6 +157,7 @@ menu_plugins_panels() {
                10) items="${items}  - FootOnsat\n" ; count=$((count+1)) ;;
                11) items="${items}  - NewVirtualkeyboard\n" ; count=$((count+1)) ;;
                12) items="${items}  - MyTranslator\n" ; count=$((count+1)) ;;
+			   13) items="${items}  - MagicPanelGold\n" ; count=$((count+1)) ;;
                 *) echo "Invalid option: $ch" ; sleep 1 ;;
             esac
         done
@@ -191,6 +193,7 @@ menu_plugins_panels() {
                10) install_package "FootOnsat" "https://raw.githubusercontent.com/fairbird/FootOnsat/main/Download/install.sh" ;;
                11) install_package "NewVirtualkeyboard" "https://raw.githubusercontent.com/fairbird/NewVirtualKeyBoard/main/installer.sh" ;;
 			   12) install_package "MyTranslator" "https://raw.githubusercontent.com/islam-2412/mytrans/main/fury/installer.sh" ;;
+			   13) install_package "MagicPanelGold" "https://raw.githubusercontent.com/Ham-ahmed/G/refs/heads/main/MagicPanelGold-v9_install.sh" ;;
             esac
         done
         echo ""
@@ -566,7 +569,7 @@ menu_tools() {
         echo "  5) Check Python3 Version"
         echo "  6) Check IP & MAC Address"
         echo "  7) Factory Reset (!!! DANGER !!!)"
-		echo "  8) fix_players.sh"
+		echo "  8) Factory Reset (!!! DANGER !!!)"
         echo ""
         echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
 
@@ -698,7 +701,7 @@ menu_tools() {
                 8)
                     echo ""
                     echo ">>> Install or reinstall PLAYERS "
-                    wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/enigma2-fix-players/refs/heads/main/fix_players.sh -O - | /bin/sh
+                    wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
                     echo ">>> ALL PLAYERS FIXED successfully!"
                     ;;
             esac
