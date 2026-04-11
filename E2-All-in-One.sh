@@ -566,7 +566,7 @@ menu_tools() {
         echo "  5) Check Python3 Version"
         echo "  6) Check IP & MAC Address"
         echo "  7) Factory Reset (!!! DANGER !!!)"
-		echo "  8) Factory Reset (!!! DANGER !!!)"
+		echo "  8) fix_players.sh"
         echo ""
         echo "  Example: 1 or 1,2 or 1-7 or 1 2 3"
 
