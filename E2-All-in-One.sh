@@ -698,7 +698,7 @@ menu_tools() {
                 8)
                     echo ""
                     echo ">>> Install or reinstall PLAYERS "
-                    wget -O - -q http://updates.mynonpublic.com/oea/feed | bash
+                    wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/enigma2-fix-players/refs/heads/main/fix_players.sh -O - | /bin/sh
                     echo ">>> ALL PLAYERS FIXED successfully!"
                     ;;
             esac
