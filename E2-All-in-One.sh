@@ -465,7 +465,7 @@ menu_medias() {
 
         for ch in $(parse_choices "$choice"); do
             case $ch in
-                1) install_package "estalker"            "https://raw.githubusercontent.com/biko-73/estalky/main/installer.sh" ;;
+                1) install_package "estalker"            "https://raw.githubusercontent.com/biko-73/Estalker/main/installer.sh" ;;
                 2) install_package "xclass"             "https://raw.githubusercontent.com/biko-73/xklass/main/installer.sh" ;;
                 3) install_package "xtreamity"          "https://raw.githubusercontent.com/biko-73/xstreamity/main/installer.sh" ;;
                 4) install_package "jedi maker xtream"  "https://raw.githubusercontent.com/jediepg/jedimakerxtream/main/installer.sh" ;;
