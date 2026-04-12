@@ -119,20 +119,13 @@ menu_plugins_panels() {
         echo "     PLUGINS & PANELS       "
         echo "============================"
         echo ""
-        echo "  1) AjPanel"
-        echo "  2) Linuxsat Panel"
-        echo "  3) EmilNabilPro"
-        echo "  4) SimplySports"
-        echo "  5) FuryBiss"
-        echo "  6) RaedQuickSignal"
-        echo "  7) ArabicPlayer"
-        echo "  8) E2BissKeyEditor"
-        echo "  9) Satelliweb"
-        echo " 10) FootOnsat"
-        echo " 11) NewVirtualkeyboard"
-        echo " 12) MyTranslator"
-        echo " 13) MagicPanelGold"
-        echo " 14) TMBD"
+        printf "  1) AjPanel              -  8) E2BissKeyEditor\n"
+        printf "  2) Linuxsat Panel       -  9) Satelliweb\n"
+        printf "  3) EmilNabilPro         - 10) FootOnsat\n"
+        printf "  4) SimplySports         - 11) NewVirtualkeyboard\n"
+        printf "  5) FuryBiss             - 12) MyTranslator\n"
+        printf "  6) RaedQuickSignal      - 13) MagicPanelGold\n"
+        printf "  7) ArabicPlayer         - 14) TMBD\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-14 or 1 3 5"
         echo ""
@@ -381,12 +374,9 @@ menu_other_skins() {
         echo "        OTHER SKINS         "
         echo "============================"
         echo ""
-        echo "  1) Maxy-FHD by MNASR"
-        echo "  2) XDREAMY"
-        echo "  3) Team_Nitro-by_BoHlala"
-        echo "  4) premium-fhd-black"
-        echo "  5) premium-fhd-blue"
-        echo "  6) premium-fhd-magenta"
+        printf "  1) Maxy-FHD by MNASR        -  4) premium-fhd-black\n"
+        printf "  2) XDREAMY                  -  5) premium-fhd-blue\n"
+        printf "  3) Team_Nitro-by_BoHlala    -  6) premium-fhd-magenta\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-6 or 1 2 3"
         echo ""
@@ -440,14 +430,10 @@ menu_medias() {
         echo "          MEDIAS            "
         echo "============================"
         echo ""
-        echo "  1) estalker"
-        echo "  2) xclass"
-        echo "  3) xtreamity"
-        echo "  4) jedi maker xtream"
-        echo "  5) BouquetMakerXtream"
-        echo "  6) E2iPlayer"
-        echo "  7) IPAudioPro"
-        echo "  8) AISubtitles"
+        printf "  1) estalker              -  5) BouquetMakerXtream\n"
+        printf "  2) xclass                -  6) E2iPlayer\n"
+        printf "  3) xtreamity             -  7) IPAudioPro\n"
+        printf "  4) jedi maker xtream     -  8) AISubtitles\n"
         echo ""
         echo "  Example: 1 or 1,3 or 1-8 or 1 3 5"
         echo ""
@@ -505,10 +491,8 @@ menu_softcam() {
         echo "         SOFTCAM            "
         echo "============================"
         echo ""
-        echo "  1) OSCam 11946 (compiled by levi5)"
-        echo "  2) NCam (Latest version)"
-        echo "  3) Add OpenATV Feed (SoftCAM)"
-        echo "  4) OSCamicam_Kitte888"
+        printf "  1) OSCam 11946 (compiled by levi5)     -  3) Add OpenATV Feed (SoftCAM)\n"
+        printf "  2) NCam (Latest version)               -  4) OSCamicam_Kitte888\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-4 or 1 2 3"
         echo ""
@@ -565,14 +549,10 @@ menu_tools() {
         echo "           TOOLS            "
         echo "============================"
         echo ""
-        echo "  1) System Update (opkg update/upgrade)"
-        echo "  2) Restart Enigma2"
-        echo "  3) Install wget & curl"
-        echo "  4) Add OpenATV Feed emu oscam"
-        echo "  5) Check Python3 Version"
-        echo "  6) Check IP & MAC Address"
-        echo "  7) Factory Reset (!!! DANGER !!!)"
-        echo "  8) fix_players.sh"
+        printf "  1) System Update (opkg update/upgrade)   -  5) Check Python3 Version\n"
+        printf "  2) Restart Enigma2                       -  6) Check IP & MAC Address\n"
+        printf "  3) Install wget & curl                   -  7) Factory Reset (!!! DANGER !!!)\n"
+        printf "  4) Add OpenATV Feed emu oscam            -  8) fix_players.sh\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-8 or 1 2 3"
         echo ""
@@ -925,11 +905,9 @@ menu_openatv_images() {
         echo "       OPENATV IMAGES       "
         echo "============================"
         echo ""
-        echo "  1) OPENATV8.0 (Latest Version)"
-        echo "  2) V7.6"
-        echo "  3) V7.5.1"
-        echo "  4) V7.5"
-        echo "  5) V7.4"
+        printf "  1) OPENATV8.0 (Latest Version)     -  4) OPENATV7.5 (final)\n"
+        printf "  2) OPENATV7.6 (Latest Version)     -  5) V7.4\n"
+        printf "  3) OPENATV7.5.1 (final)\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-5 or 1 2 3"
         echo ""
@@ -942,9 +920,9 @@ menu_openatv_images() {
 
         case $choice in
             1) menu_openatv8_test ;;
-            2) menu_openatv_v76 ;;
-            3) menu_openatv_v751 ;;
-            4) menu_openatv_v75 ;;
+            2) menu_openatv7_6 ;;
+            3) menu_openatv7_5_1 ;;
+            4) menu_openatv7_5 ;;
             5) menu_openatv_v74 ;;
             *) echo "Invalid option!" ; sleep 1 ;;
         esac
@@ -985,17 +963,25 @@ menu_openatv8_test() {
 }
 
 # ============================================================
-#              OPENATV V7.6 IMAGES (EMPTY)
+#       OPENATV7.6 (Latest Version) - INSTALLER
 # ============================================================
-menu_openatv_v76() {
+menu_openatv7_6() {
     while true; do
         clear
         echo "============================"
-        echo "     OPENATV V7.6 IMAGES    "
+        echo "  OPENATV7.6 (Latest Version)"
         echo "============================"
         echo ""
-        echo "  No images added yet."
-        echo "  Coming soon..."
+        echo "  This will download the latest stable image"
+        echo "  for your device and save it to /media/hdd/images/"
+        echo ""
+        echo "  >>> Starting the download process..."
+        echo ""
+
+        wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/download_images/refs/heads/main/OpenATV7_6.sh -O - | /bin/sh
+
+        echo ""
+        echo "  >>> Process finished."
         echo ""
         echo "  0) BACK"
         echo ""
@@ -1010,17 +996,25 @@ menu_openatv_v76() {
 }
 
 # ============================================================
-#              OPENATV V7.5.1 IMAGES (EMPTY)
+#       OPENATV7.5.1 (final) - INSTALLER
 # ============================================================
-menu_openatv_v751() {
+menu_openatv7_5_1() {
     while true; do
         clear
         echo "============================"
-        echo "   OPENATV V7.5.1 IMAGES    "
+        echo "  OPENATV7.5.1 (final)"
         echo "============================"
         echo ""
-        echo "  No images added yet."
-        echo "  Coming soon..."
+        echo "  This will download the final version 7.5.1"
+        echo "  for your device and save it to /media/hdd/images/"
+        echo ""
+        echo "  >>> Starting the download process..."
+        echo ""
+
+        wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/download_images/refs/heads/main/OpenATV7_5_1.sh -O - | /bin/sh
+
+        echo ""
+        echo "  >>> Process finished."
         echo ""
         echo "  0) BACK"
         echo ""
@@ -1035,17 +1029,25 @@ menu_openatv_v751() {
 }
 
 # ============================================================
-#              OPENATV V7.5 IMAGES (EMPTY)
+#       OPENATV7.5 (final) - INSTALLER
 # ============================================================
-menu_openatv_v75() {
+menu_openatv7_5() {
     while true; do
         clear
         echo "============================"
-        echo "     OPENATV V7.5 IMAGES    "
+        echo "  OPENATV7.5 (final)"
         echo "============================"
         echo ""
-        echo "  No images added yet."
-        echo "  Coming soon..."
+        echo "  This will download the final version 7.5"
+        echo "  for your device and save it to /media/hdd/images/"
+        echo ""
+        echo "  >>> Starting the download process..."
+        echo ""
+
+        wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/download_images/refs/heads/main/OpenATV7_5.sh -O - | /bin/sh
+
+        echo ""
+        echo "  >>> Process finished."
         echo ""
         echo "  0) BACK"
         echo ""
@@ -1094,10 +1096,8 @@ menu_openpli_images() {
         echo "       OPENPLI IMAGES       "
         echo "============================"
         echo ""
-        echo "  1) V9.2"
-        echo "  2) V9.1"
-        echo "  3) V8.3"
-        echo "  4) Scarthgap builds"
+        printf "  1) V9.2                    -  3) V8.3\n"
+        printf "  2) V9.1                    -  4) Scarthgap builds\n"
         echo ""
         echo "  Example: 1 or 1,2 or 1-4 or 1 2 3"
         echo ""
