@@ -925,7 +925,7 @@ menu_openatv_images() {
         echo "       OPENATV IMAGES       "
         echo "============================"
         echo ""
-        echo "  1) V8.0"
+        echo "  1) OPENATV8.0 (Latest Version)"
         echo "  2) V7.6"
         echo "  3) V7.5.1"
         echo "  4) V7.5"
@@ -941,7 +941,7 @@ menu_openatv_images() {
         [ "$choice" = "0" ] && { menu_download_images; return; }
 
         case $choice in
-            1) menu_openatv_v80 ;;
+            1) menu_openatv8_test ;;
             2) menu_openatv_v76 ;;
             3) menu_openatv_v751 ;;
             4) menu_openatv_v75 ;;
@@ -952,17 +952,25 @@ menu_openatv_images() {
 }
 
 # ============================================================
-#              OPENATV V8.0 IMAGES (EMPTY)
+#       OPENATV8.0 (Latest Version) - INSTALLER
 # ============================================================
-menu_openatv_v80() {
+menu_openatv8_test() {
     while true; do
         clear
         echo "============================"
-        echo "     OPENATV V8.0 IMAGES    "
+        echo "  OPENATV8.0 (Latest Version)"
         echo "============================"
         echo ""
-        echo "  No images added yet."
-        echo "  Coming soon..."
+        echo "  This will download the latest test image"
+        echo "  for your device and save it to /media/hdd/images/"
+        echo ""
+        echo "  >>> Starting the download process..."
+        echo ""
+
+        wget -q "--no-check-certificate" https://raw.githubusercontent.com/MARKETTV1/download_images/refs/heads/main/OpenATV8_0.sh -O - | /bin/sh
+
+        echo ""
+        echo "  >>> Process finished."
         echo ""
         echo "  0) BACK"
         echo ""
